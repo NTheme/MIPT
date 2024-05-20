@@ -1,0 +1,6 @@
+build/*
+lib/*
+report/*
+bin/*
+3rdparty/*
+dist/*
