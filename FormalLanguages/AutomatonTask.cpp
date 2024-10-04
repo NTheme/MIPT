@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "AutomationTask.hpp"
+#include "AutomatonTask.hpp"
 
 signed main() {
   std::string regular;
