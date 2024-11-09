@@ -1,0 +1,499 @@
+\documentclass[a5paper,twoside,russian]{article}
+\usepackage[intlimits]{amsmath}
+\usepackage{amsthm,amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[final]{graphicx,epsfig}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english]{babel}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{enumitem}
+\RequirePackage{enumitem}
+\renewcommand{\alph}[1]{\asbuk{#1}}
+\setenumerate[1]{label=\alph*), fullwidth, itemindent=\parindent, listparindent=\parindent} 
+\setenumerate[2]{label=\arabic*), fullwidth, itemindent=\parindent, listparindent=\parindent, leftmargin=\parindent}
+\usepackage{mathtools}
+
+\usepackage{rmathbr}  % для автопереносов
+\usepackage{setspace} % увеличение межстрочного расстояния
+
+\usepackage{thmtools}
+\renewcommand{\qed}{$\hfill\blacksquare$}
+\declaretheorem{definition} 
+\declaretheoremstyle[%
+  spaceabove=-6pt,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  qed=\qedsymbol,%
+  headpunct={}
+]{mystyle} 
+\declaretheorem[name={$\blacktriangle$},style=mystyle,unnumbered,
+]{prf}
+
+\hoffset=-10.4mm \voffset=-12.4mm \oddsidemargin=5mm \evensidemargin=0mm \topmargin=0mm \headheight=0mm \headsep=0mm
+\textheight=174mm \textwidth=113mm
+
+\newcommand{\bfv}{\mathbf}
+
+\def \e {\varepsilon}
+
+\def \ZZ {\mathbb Z}
+\def \FF {\mathbb F}
+\def  \R {\mathbb R}
+\def \QQ {\mathbb Q}
+\def \NN {\mathbb N}
+\def \PP {\mathbb P}
+\def \EE {\mathbb E}
+\def \DD {\mathbb D}
+\def \CC {\mathbb C}
+\def \II {\mathbb I}
+
+
+\def\Ss{\mathcal{S}^n} 
+\def\Pp{\mathcal{P}^{n}}
+\def\cA{{\cal A}}
+\def\cB{{\cal B}}
+\def\cD{{\cal D}}
+\def\cC{{\cal C}}
+\def\cQ{{\cal Q}}
+%\def\R{{\cal R}}
+\def\cM{{\cal M}}
+\def\cN{{\cal N}}
+\def\cT{{\cal T}}
+\def\cP{{\cal P}}
+\def\cF{{\cal F}}
+\newcommand{\St}{\mathbb{S}}
+\def\la{\langle}
+\def\ra{\rangle}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\dom}{dom}
+
+\newcommand{\Tr}{\operatorname{Tr}}
+% Блочная матрица
+
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\def\<{\langle}
+\def\>{\rangle}
+
+
+
+
+\begin{document}
+\selectlanguage{russian}
+\begin{center}
+    \textbf{Домашнее задание 5}
+\end{center}
+\begin{center}
+    \textbf{Deadline - 18.10.2024 в 23:59}
+\end{center}
+
+\section*{Основная часть}
+\begin{enumerate}[label=\textbf{Задача \arabic*.}]
+\subsection*{Выпуклые множества}
+\item Проверьте, являются ли выпуклыми множества 
+    \begin{enumerate}
+        \item (0.5 балла) $S = \{ x_1 \in \mathbb{R}, x_2 \in \mathbb{R} \mid x_1 > 0, x_2 > 0, x_1 x_2 \geq 1 \}$.      
+
+        \begin{prf}
+            \[       
+            X_1(x_1, y_1), X_2(x_2, y_2) \in S\Rightarrow     
+            \begin{aligned}
+                &x_1, y_1, x_2, y_2 > 0 \\
+                &x_1 y_1, x_2 y_2 \geq 1
+            \end{aligned}
+            \]
+            \[
+            X_t = (x_t, y_t) = tX_1 + (1-t)X_2, \, t \in [0, 1]
+            \]
+
+            $X_t = \left( tx_1 + (1-t)x_2, ty_1 + (1-t)y_2 \right) \Rightarrow x_t > 0, y_t > 0$
+            $x_t y_t = t^2 x_1 y_1 + (1-t^2) x_2 y_2 + t (1-t)(x_1 y_2 + y_1 x_2) \geq t^2 + (1-t)^2 + t(1-t)\left(\frac{x_1}{x_2} + \frac{x_2}{x_1}\right) \geq 2t^2 - 2t + 1 + t(1-t) \cdot 2 = 1$
+        
+            \[
+            \begin{aligned}
+                \Rightarrow X_t \in S
+            \end{aligned}
+            \]
+        \end{prf}
+
+        \item (0.5 балла) $S = \{ x \in \mathbb{R}^d \mid x_1 \leq x_2 \leq \ldots \leq x_d \}$.
+        
+        \begin{prf}
+            \[
+            X_1 = (x_1^1, ..., x_1^d), X_2 = (x_2^1, ..., x_2^d) \in S \Rightarrow
+            \begin{aligned}
+                &x_1^1 \leq ... \leq x_1^d \\
+                &x_2^1 \leq ... \leq x_2^d
+            \end{aligned}
+            \]
+            \[
+            X_t = (x_1^1, ... x_1^d) = tX_1 + (1-t)X_2, \, t \in [0, 1]
+            \]
+
+            $x_t^i = tx_1^i + (1-t)x_2^i$
+            
+            \begin{enumerate}
+                \item $i > 0$
+                
+                    $tx_1^t + (1-t)x_2^i \geq tx_1^{i+i} + (1-t)x_2^{i-1} = x_t^{i-1}$
+
+                \item $i < d$
+                
+                    $tx_1^t + (1-t)x_2^i \leq tx_1^{i+1} + (1-t)x_2^{i+1} = x_t^{i+1}$
+            \end{enumerate}
+            
+            \[
+            \begin{aligned}
+                \Rightarrow x_t^1 \leq ... x_t^d \Rightarrow X_t \in S
+            \end{aligned}
+            \]
+        \end{prf}
+
+
+        \item (1 балл) $S = \{ x \in \mathbb{R}^d \mid  \| x - a\|_2 \leq \| x - b\|_2 \}$, где $a\neq b \in \mathbb{R}^d$.
+        
+        \begin{prf}
+            \[
+            X_1, X_2 \in S \Rightarrow
+            \begin{aligned}
+                &\| X_1 - a \|_2 \leq \| X_1 - b \|_2 \\
+                &\| X_2 - a \|_2 \leq \| X_2 - b \|_2
+            \end{aligned}
+            \]
+            \[
+            X_t = tX_1 + (1-t)X_2, \, t \in [0, 1]
+            \]
+
+            $\| X_t - a\|_2 \leq \| X_t - b\|_2 \Leftrightarrow \| X_t - a\|_2^2 \leq \| X_t - b\|_2^2 \Leftrightarrow 
+            \langle X_t-a, X_t-a \rangle \leq \langle X_t-b, X_t-b \rangle \Leftrightarrow 
+            \langle X_t, b-a \rangle \leq \frac{\langle a, a \rangle + \langle b, b \rangle}{2} \Leftrightarrow 
+            \left\langle tX_1 + (1-t) X_2, b-a \right\rangle \leq \frac{\|a\|_2^2 + \| b\|_2^2}{2} \Leftrightarrow
+            t \langle X_1, b-a \rangle + (1-t) \langle X_2, b-a \rangle \leq \frac{\|a\|_2^2 + \| b\|_2^2}{2} \Leftrightarrow
+            t \frac{\|a\|_2^2 + \| b\|_2^2}{2} + (1-t) \frac{\|a\|_2^2 + \| b\|_2^2}{2} \leq \frac{\|a\|_2^2 + \| b\|_2^2}{2} \Rightarrow$
+            
+            \[
+            \begin{aligned}
+                \Rightarrow X_t \in S
+            \end{aligned}
+            \]
+        
+        \end{prf}
+    
+    \end{enumerate}
+    
+    \item Пусть $ S \subseteq \mathbb{R}^d$ и пусть $\|\cdot\|$ -- норма на $\mathbb{R}^d$.
+    \begin{enumerate}
+        \item (1 балл) Для $a \geq 0$ определим множество $S_a$ как:
+        \begin{align*}
+            S_a = \{x \mid \text{dist}(x, S) \leq a \},
+        \end{align*}
+        где 
+        \begin{align*}
+            \text{dist}(x, S) = \inf_{y \in S} \| x - y \|.
+        \end{align*}
+        Множество $S_a$ называется расширенным на $a$ относительно $S$. Докажите, что если $S$ выпукло, то $S_a$ также выпукло.
+
+        \begin{prf}
+            \[
+            X_1, X_2 \in S_a \Rightarrow
+            \begin{aligned}
+                & \text{dist}(X_1, S) \leq a \\
+                & \text{dist}(X_2, S) \leq a
+            \end{aligned}
+            \]
+            \[
+            X_t = tX_1 + (1-t)X_2, \, t \in [0, 1]
+            \]
+
+            $\text{dist}(X, S) \leq a \Leftrightarrow \forall \varepsilon > 0 \, \exists X' \in S \, \| X- X' \| < a + \varepsilon$
+            
+            \vspace{5pt} 
+            Фиксируем $\varepsilon > 0$:
+
+            -> $\exists X_1', X_2' \in S \, \| X_1 - X_1' \|, \| X_2 - X_2' \| < a + \varepsilon$
+            
+            -> $X_t' = tX_1' + (1-t)X_2' \in S$ в силу выпуклости $S$.
+
+            -> $\| X_t - X_t' \| = \| tX_1 + (1-t)X_2 - tX_1' - (1-t)X_2' \| \leq t \| X_1 - X_1' \| + (1-t) \| X_2 - X_2' \| \leq a + \varepsilon$
+            
+            \vspace{5pt} 
+            Так как это верно $\forall \varepsilon$:
+            \[
+            \begin{aligned}
+                \text{dist} (X_t, S) \leq a \Rightarrow X_t \in S_a
+            \end{aligned}
+            \]        
+        \end{prf}
+
+        \item (1 балл) Для $a \geq 0$ определим множество $S_{-a}$ как:
+        \begin{align*}
+            S_{-a} = \{x \mid B(x, a) \subset S\},
+        \end{align*}
+        где $B(x, a)$ - открытый шар (в норме $\| \cdot \|$) с центром в $x$ и радиусом $a$. Множество $S_{-a}$ называется суженным на $a$ относительно $S$. Докажите, что если $S$ выпукло, то $S_{-a}$ также выпукло.
+    
+        \begin{prf}
+            \[
+            X_1, X_2 \in S_{-a} \Rightarrow
+            \begin{aligned}
+                & B(X_1, a) \subset S \\
+                & B(X_2, a) \subset S
+            \end{aligned}
+            \]
+            \[
+            \begin{aligned}
+                & X_t = tX_1 + (1-t)X_2, \, t \in [0, 1] \\
+                & X_t' \in B(X_t, a)
+            \end{aligned}
+            \]
+
+            $X_1' = X_1 + X_t' - X_t, X_2' = X_2 + X_t' - X_t$
+
+            \[
+            \begin{aligned}
+                & \| X_1' - X_1 \| = \| X_t' - X_t \| \leq a \Rightarrow X_1' \in B(X_1, a) \in S\\
+                & \| X_2' - X_2 \| = \| X_t' - X_t \| \leq a \Rightarrow X_2' \in B(X_2, a) \in S
+            \end{aligned}
+            \Rightarrow X_t' \in S \Rightarrow
+            \]
+
+            \[
+            \begin{aligned}
+                \Rightarrow B(X_t, a) \in S \Rightarrow X_t \in S_{-a}
+            \end{aligned}
+            \]                    
+        \end{prf}
+    \end{enumerate}
+
+    \item (1 балл) Пусть дано множество $X \subseteq \mathbb{R}^d$ и $x^0 \in X$. Докажите, что множество
+    \begin{align*}
+        K(X, x^0)=\left\{ y \in\mathbb{R}^d \mid y^T x^0 \geq y^T x \text{ for all } x \in X\right\}
+    \end{align*}
+    является выпуклым конусом.
+
+    \begin{prf}
+        \[
+        X_1, X_2 \in K(X, x^0) \Rightarrow
+        \begin{aligned}
+            & B(X_1, a) \subset S \\
+            & B(X_2, a) \subset S
+        \end{aligned}
+        \]
+        \[
+        X_t = tX_1 + (1-t)X_2, \, t \in [0, 1]
+        \]
+
+        $X_t^T x^0 = t X_1^T x^0 + (1-t) X_2^T x^0 \geq t X_1^T x + (1-t) X_2^T x = X_t^T x \Rightarrow$
+        \[
+        \begin{aligned}
+            \Rightarrow X_t \in K(X, x^0)
+        \end{aligned}
+        \]
+
+        $X \in K(X, x^0), a \geq 0 \Rightarrow aX^T x^0 \geq a X^T x \text{ for all } x \in X \Leftrightarrow X^T x^0 \geq X^T x \text{ for all } x \in X \Rightarrow$
+        \[
+        \begin{aligned}
+            \Rightarrow K(X, x^0) - \text{Конус}
+        \end{aligned}
+        \]
+    \end{prf}
+\end{enumerate}
+
+\subsection*{Выпуклые функции}
+\begin{enumerate}[label=\textbf{Задача \arabic*.}]
+    \item (1 балл) Пусть дана функция $f: \mathbb{R}^2 \to \mathbb{R}$. Выясните является ли она выпуклой, если $f(x) = x_1^2 x_2^2$.
+    
+    \begin{prf}
+        \[
+        \nabla f \left( 
+        \begin{pmatrix}
+            x_1 \\
+            x_2
+        \end{pmatrix}
+        \right) = 
+        \begin{pmatrix}
+            2 x_1 x_2^2 \\
+            2 x_1^2 x_2
+        \end{pmatrix}
+        \]
+        \[
+        \nabla^2 f 
+        \left(
+        \begin{pmatrix}
+            x_1 \\
+            x_2
+        \end{pmatrix}
+        \right) = 
+        \begin{pmatrix}
+            2 x_2^2 & 4 x_1 x_2 \\
+            4 x_1 x_2 & 2 x_1^2
+        \end{pmatrix}
+        \]
+
+        $\delta_1 (\nabla^2 f) = 2 x_2^2 \geq 0$
+
+        $\delta_2 (\nabla^2 f) = 0 \geq 0$
+
+        Используя критерий Сильвестра \sout{Сталлоне}: $\nabla^2 f \succeq 0 \Rightarrow f $ \textbf{выпукла}
+
+    \end{prf}
+
+    \item (1.5 балла) Пусть дана функция $f: \mathbb{R}^d \to \mathbb{R}$. Выясните является ли функция выпуклой/$\mu$-сильно выпуклой, если $f(x) = \sum\limits_{i=1}^{d} x_i^4$. В случае $\mu$-сильной выпуклости нужно найти и $\mu$.
+    
+    \begin{prf}
+        \begin{enumerate}
+            \item Выпуклость
+            
+            \[
+            \nabla f 
+            \left(
+            \begin{pmatrix}
+                x_1 \\
+                \vdots \\
+                x_d
+            \end{pmatrix}
+            \right) = 
+            \begin{pmatrix}
+                4 x_1^3 \\
+                \vdots \\
+                4 x_d^3
+            \end{pmatrix}
+            \]
+            \[
+            \nabla^2 f 
+            \left( 
+            \begin{pmatrix}
+                x_1 \\
+                \vdots \\
+                x_d
+            \end{pmatrix}
+            \right) = 
+            \begin{pmatrix}
+            12 x_1^2 & 0 & \cdots & 0 & 0 \\
+            0 & 12 x_2^2 & \cdots & 0 & 0 \\
+            \vdots & \vdots & \ddots & \vdots & \vdots \\
+            0 & 0 & \cdots & 12 x_{d-1}^2 & 0 \\
+            0 & 0 & \cdots & 0 & 12 x_d^2
+            \end{pmatrix}
+            \]
+
+
+            $\delta_1 (\nabla^2 f) = 12 x_1^2 \geq 0$
+
+            $\delta_2 (\nabla^2 f) = 12^2 x_1^2 x_2^2 \geq 0$
+
+            $\cdots$
+
+            $\delta_{d-1} (\nabla^2 f) = 12^{d-1} \prod\limits_{i=1}^{d-1}x_i^2 \geq 0$
+
+            $\delta_d (\nabla^2 f) = 12^{d} \prod\limits_{i=1}^{d}x_i^2 \geq 0$
+
+
+            Используя критерий Сильвестра \sout{Сталлоне}: $\nabla^2 f \succeq 0 \Rightarrow f $ \textbf{выпукла}
+
+            \item $\mu$-сильно Выпуклость
+            
+            Предположим, что $f - \mu$-сильно выпукла $\Rightarrow f(x) \geq f(\overline{0}) + \left\langle \nabla f(\overline{0}), x-\overline{0} \right\rangle + \frac{\mu}{2} \left\| x - \overline{0} \right\|_2^2 = \frac{\mu}{2} \sum\limits_{i=1}{d} x_i^2$
+
+            Но:
+            $f\left(\begin{pmatrix}
+                \frac{\sqrt{\mu}}{2} \\
+                0 \\
+                \vdots \\
+                0
+            \end{pmatrix}\right) = \frac{\mu^2}{16} < \frac{\mu}{8} = \frac{\mu}{2} \left( \frac{\sqrt{\mu}}{2} \right)^2 = \frac{\mu}{2} \sum\limits_{i=1}{d} x_i^2 \Rightarrow \bot \Rightarrow f$ \textbf{не $\mu$-сильно выпукла.}
+
+
+        \end{enumerate}
+    \end{prf}
+
+    \item (1.5 балла) Пусть дана функция $f: \mathbb{S}^d \to \mathbb{R}$. Здесь $\mathbb{S}$ -- симметричные матрицы. Выясните является ли функция выпуклой/вогнутой, если
+    \begin{enumerate}
+        \item $f(X) = \lambda_{\max}(X)$
+        
+        \vspace{5pt}
+        \begin{prf}
+             $X \in \mathbb{S} \Rightarrow f(X) = \lambda_{\max}(X) = \sqrt{\lambda_{\max}^2(X)} = \sqrt{\lambda_{\max}(X^2)} \sqrt{\lambda_{\max}(X^* X)}$ - спектральная норма. 
+            \[
+            \begin{aligned}
+                & X_1, X_2 \in \mathbb{S} \\
+                & X_t = tX_1 + (1-t)X_2, \, t \in [0, 1]
+            \end{aligned}
+            \]
+            
+            Значит: $f(X_t) = f(tX_1 + (1-t)X_2) \leq f(tX_1) + f((1-t)X_2) = |t|f(X_1) + |(1-t)| f(X_2) = t f(X_1) + (1-t) f(X_2) \Rightarrow f$ \textbf{выпукла}
+        \end{prf}
+
+        \item $f(X) = \lambda_{\min}(X)$
+        
+        \begin{prf}
+            \[
+            \begin{aligned}
+            & X_1 = 
+            \begin{pmatrix}
+                1 & 0 \\
+                0 & 0
+            \end{pmatrix},
+            \, \, X_2 = 
+            \begin{pmatrix}
+                0 & 0 \\
+                0 & 1 \\
+            \end{pmatrix} \\
+            & X_t = tX_1 + (1-t)X_2, \, t = \frac{1}{2}
+            \end{aligned}
+            \]
+            
+            $f(X_1) = f(X_2) = 0, f(X_t) = \frac{1}{2} > t f(X_1) + (1-t) f(X-2) = 0 \Rightarrow f$ \textbf{не выпукла}
+
+        \end{prf}
+    \end{enumerate}
+
+    \item (1 балл) Пусть $f : \operatorname{dom} f \rightarrow \mathbb{R}$ -- функция с областью определения $\operatorname{dom} f \subseteq \mathbb{R}^d$. Покажите, что $f$ выпукла если и только если ее сужение на любую прямую выпукло. Формально это будет значить, что для любых $x_0 \in \operatorname{dom} f,u\in\mathbb{R}^d$, функция
+$g: t\mapsto f(x_0 + tu)$ выпукла на  $\operatorname{dom} g:= \{{t\in\mathbb{R} : x_0 + tu\in \operatorname{dom} f}\}$.
+
+    \begin{prf}
+        \begin{enumerate}
+            \item Пусть $f$ выпукла.
+            
+            \[
+            \begin{aligned}
+                & X_1, X_2 \in \mathbb{R}   \\              
+                & X_t = tX_1 + (1-t)X_2, \, t \in [0, 1]
+            \end{aligned}
+            \]
+
+            $g(tX_1 + (1-t)X_2) = f(x_0 + (tX_1 + (1-t)X_2)u) = f(t(x_0 + aX_1) + (1-t)(x_0 + uX_2)) \leq t f(x_0 + aX_1) + (1-t)f(x_0 + uX_2) = tg(X_1) + (1-t)g(X_2) \Rightarrow g$ \textbf{выпукла}
+
+            \item Пусть $f$ не выпукла
+            
+            $\exists X_1', X_2' \in \operatorname{dom} f \, \exists t \in [0, 1]: \, f(tX_1' + (1-t)X_2') > tf(X_1') + (1-t)f(X_2')$
+            \[
+            \begin{aligned}
+                & x_0 = X_1' \\
+                & u = X_2' - X_1' \\
+                & X_1 = 0 \\
+                & X_2 = 1 \\
+                & X_t = tX_1 + (1-t)X_2 \\
+                & g(X_1) = g(0) = f(X_1') \\
+                & g(X_2) = g(1) = f(X_2')
+            \end{aligned}
+            \]
+
+
+            $g(X_t) = g(tX_1 + (1-t)X_2) = g(1-t) = f(X_1' + (1-t)(X_2' - X_1')) = f(tX_1' + (1-t)X_2') > tf(X_1') + (1-t)f(X_2') = tg(X_1) + (1-t)g(X_2) \Rightarrow g$ \textbf{не выпукла}
+        \end{enumerate}
+
+    \end{prf}
+
+\end{enumerate}
+\end{document}

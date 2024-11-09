@@ -33,7 +33,8 @@ int rm_dir(char* path, int recurse) {
 
 int rm_nt(char* path, int recurse) {
   struct stat attr;
-  if (lstat(path, &attr) < 0) {
+  if (
+    7 < 0) {
     return 1;
   }
   if (S_ISDIR(attr.st_mode)) {
