@@ -1,0 +1,190 @@
+\documentclass[a5paper,twoside,russian]{article}
+\usepackage[intlimits]{amsmath}
+\usepackage{amsthm,amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[final]{graphicx,epsfig}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english]{babel}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{enumitem}
+\renewcommand{\alph}[1]{\asbuk{#1}}
+\setenumerate[1]{label=\alph*), fullwidth, itemindent=\parindent, listparindent=\parindent}
+\setenumerate[2]{label=\arabic*), fullwidth, itemindent=\parindent, listparindent=\parindent, leftmargin=\parindent}
+\usepackage{mathtools}
+
+\usepackage{rmathbr}  % для автопереносов
+\usepackage{setspace} % увеличение межстрочного расстояния
+
+\usepackage{thmtools}
+\renewcommand{\qed}{$\hfill\blacksquare$}
+\declaretheorem{definition}
+\declaretheoremstyle[%
+    spaceabove=-6pt,%
+    spacebelow=6pt,%
+    headfont=\normalfont\itshape,%
+    postheadspace=1em,%
+    qed=\qedsymbol,%
+    headpunct={}
+]{myStyle}
+\declaretheorem[name={$\blacktriangle$},style=myStyle,unnumbered,
+]{prf}
+
+\hoffset=-10.4mm \voffset=-12.4mm \oddsidemargin=5mm \evensidemargin=0mm \topmargin=0mm \headheight=0mm \headsep=0mm
+\textheight=174mm \textwidth=113mm
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\dom}{dom}
+\newcommand{\Tr}{\operatorname{Tr}}
+
+\begin{document}
+    \selectlanguage{russian}
+    \begin{center}
+        \textbf{Домашнее задание 9, двойственность по Лагранжу}
+    \end{center}
+    \begin{center}
+        \textbf{Deadline - 15.11.2024 в 23:59}
+    \end{center}
+
+    \section*{Основная часть}
+
+    \begin{enumerate}[label=\textbf{Задача \arabic*.}]
+
+        \item (1 балл) Найдите двойственную задачу к задаче
+        \begin{equation*}
+            \begin{aligned}
+                \max_{x_1, x_2, x_3} & x_1 + 2x_2 + 3x_3 \\
+                \text{s.t.} \quad & 4x_1 + 5x_2 + 6x_3 \leq 7, \\
+                & 8x_1 + 9x_2 + 10x_3 = 11, \\
+                & x_1 \geq 0.
+            \end{aligned}
+        \end{equation*}
+
+        \begin{prf}
+            $\mathcal{L} = -x_1 - 2x_2 - 3x_3 + \lambda_1 (4x_1 + 5x_2 + 6x_3 - 7) - \lambda_2 x_1 + \eta_1 (8x_1 + 9x_2 + 10x_3 - 11)$
+
+            $\frac{\partial}{\partial{x_1}} \mathcal{L} = -1 + 4\lambda_1 - \lambda_2 + 8\eta_1=  0$
+
+            $\frac{\partial}{\partial{x_2}} \mathcal{L} = -2 + 5\lambda_1 + 9\eta_1=0$
+
+            $\frac{\partial}{\partial{x_3}} \mathcal{L} = -3 + 6\lambda_1 + 10\eta_1=0$
+
+            \[
+                \text{Двойственная:}
+                \left\{\!
+                \begin{array}{l}
+                    g(\lambda, \eta) = \inf\limits_{x} \mathcal{L} = -7 \lambda_1 - 11\eta_1 \rightarrow \max\limits_{\lambda, \eta}\\
+                    \lambda \geq 0                                                                                                   \\
+                    -1 + 4\lambda_1 - \lambda_2 + 8\eta_1=  0                                                                          \\
+                    -2 + 5\lambda_1 + 9\eta_1=0                                                                                      \\
+                    -3 + 6\lambda_1 + 10\eta_1=0
+                \end{array}
+                \right.
+            \]
+        \end{prf}
+
+        \item (1 балл) Найдите двойственную задачу к задаче
+        \begin{equation*}
+            \begin{cases}
+                -9x_1 + 8x_2+10x_3 \rightarrow \min \\
+                -4x_1 + 4x_3 \leq 1 \\
+                5x_1 + x_2 + 7x_3 = 0 \\
+                -8x_1 - 7x_2 + 3x_3 \geq 2 \\
+                6x_1 + 3x_2 + 8x_3 \leq 3 \\
+                x_1 \geq 0 \\
+                x_2 \geq 0.
+            \end{cases}
+        \end{equation*}
+
+        \begin{prf}
+            $\mathcal{L} = -9x_1 + 8x_2 + 10x_3 + \lambda_1 (-4x_1 + 4x_3 - 1) + \lambda_2 (8x_1 + 7x_2 - 3x_3 + 2) +
+            \lambda_3 (6x_1 + 3x_2 + 8x_3 - 3) - \lambda_4 x_1 - \lambda_5 x_2 + \eta_1 (5x_1 + x_2 + 7x_3)$
+
+            \[
+                \text{Двойственная:}
+                \left\{\!
+                \begin{array}{l}
+                    g(\lambda, \eta) = \inf\limits_{x} \mathcal{L} = -\lambda_1 + 2 \lambda_2 - 3\lambda_3 \rightarrow \max\limits_{\lambda, \eta}\\
+                    \lambda \geq 0                                                                                                                 \\
+                    -9 - 4\lambda_1 + 8\lambda_2 + 6\lambda_3 - \lambda_4 + 5\eta_1 = 0                                                            \\
+                    8 + 7\lambda_2 + 3\lambda_3 - \lambda_5 + \eta_1 = 0                                                                           \\
+                    10 - 4\lambda_1 - 3\lambda_2 + 8\lambda_3 + 7\eta_1 = 0
+                \end{array}
+                \right.
+            \]
+        \end{prf}
+
+        \item (1 балл) В терминах двойственной задачи сформулировать условия несовместности системы
+        \begin{equation*}
+            \begin{cases}
+                A_1 x \leq b_1 \\
+                A_2 x = b_2.
+            \end{cases}
+        \end{equation*}
+
+        \textit{Указание.} К данной системе можно приписать "искусственную"\ целевую функцию, у которой оптимум гарантированно достигается и один и тот же при любых переменных, удовлетворяющих ограничениям. Тем самым, задача формально превратится в задачу оптимизации. Далее, можно построить двойственную к ней и, пользуясь довольно известным результатом, сказать, что исходная система совместна тогда и только тогда, когда совместна двойственная. Остается только заметить, что задача линейного программирования несовместна, если либо не существует хотя бы одного набора переменных, удовлетворяющих ее ограничениям, либо такие наборы могут "улетать"\ на бесконечность, тем самым экстремум не будет достижим.
+
+        \item (2 балла) Рассмотрим задачу линейного программирования
+        \begin{equation}
+            \begin{cases}
+                c_1x_1 + c_2x_2 \rightarrow \max \\
+                A_{11}x_1 + A_{12}x_2 \leq b_1 \\
+                A_{21}x_1 + A_{22}x_2 = b_2 \\
+                x_1 \leq 0,
+                \label{eq:linprog_classic}
+            \end{cases}
+        \end{equation}
+
+        \begin{enumerate}
+            \item (0.5 балла) Найдите двойственную к ней задачу.
+            \begin{prf}
+                $\mathcal{L} = -c_1 x_1 - c_2 x_2 + \lambda_1 (A_{11} x_1 + A_{12}x_2 - b_1) + \lambda_2 x_1 + \eta_1 (A_{21} x_1 + A_{22}x_2 - b_2)$
+
+                \[
+                    \text{Двойственная:}
+                    \left\{\!
+                    \begin{array}{l}
+                        g(\lambda, \eta) = \inf\limits_{x} \mathcal{L} = - \lambda_1 b_1 - \eta_1 b_2  \rightarrow \max\limits_{\lambda, \eta}\\
+                        \lambda_1 \geq 0                                                                                                     \\
+                        -c_1 + A_{11} \lambda_1 + \lambda_2 + \eta_1 A_{21} = 0                                                              \\
+                        -c_2 + A_{12}\lambda_1 + \eta_1 A_{22} = 0
+                    \end{array}
+                    \right.
+                \]
+            \end{prf}
+
+            \item (0.75 балла) Пользуясь результатами прошлого пункта, покажите, что если $(x_1, x_2)$ удовлетворяет ограничениям ЗЛП (\ref{eq:linprog_classic}), а $(u_1, u_2)$ удовлетворяет ограничениям двойственной к ЗЛП (\ref{eq:linprog_classic}) задачи, то выполняется
+            \begin{equation*}
+                b_1 u_1 + b_2 u_2 \geq c_1 x_1 + c_2 x_2.
+            \end{equation*}
+            \begin{prf}
+                Так как оптимальное значение прямой задачи ограничено снизу решением двойственной, то
+                $d^* \leq p^* \Leftrightarrow -\lambda_1 b_1 - \lambda_2 b_2 \leq -c_1 x_1 - c_2 x_2 \Leftrightarrow
+                b_1 u_1 + b_2 u_2 \geq c_1 x_1 + c_2 x_2$
+            \end{prf}
+
+            \item (0.75 балла) Покажите, что если выполнены условия прошлого пункта, то для того, чтобы $(x_1, x_2)$ был решением ЗЛП (\ref{eq:linprog_classic}), а $(u_1, u_2)$ был решением двойственной к ЗЛП (\ref{eq:linprog_classic}) задачи, необходимо и достаточно, чтобы значения функционалов этих задач совпадали.
+            \begin{prf}
+                Если значения функционалов совпадают, то это значит, что максимум функционала двойственной равен
+                минимуму функционала прямой.
+                В силу нижней оценки на значение функционала прямой задачи мы не сможем его уменьшить, а значит получим
+                решение прямой задачи.
+                Аналогично не сможем увеличить значение функционала двойственной в силу верхней оценки при помощи
+                функционала прямой задачи.
+
+                Если переменные являются решением ЗЛП прямой и двойственной, то в силу линейности функционалов верны
+                условия Слейтера, а значит имеет место сильная двойственность, что означает совпадение значений функционалов.
+            \end{prf}
+
+        \end{enumerate}
+
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,14 @@
+BasedOnStyle: Google
+ColumnLimit: 128
+AllowShortBlocksOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: None
+AllowShortLoopsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+AllowShortCompoundRequirementOnASingleLine: false
+RequiresClausePosition: WithFollowing
+SortIncludes: CaseInsensitive
+IndentRequiresClause: true
+SeparateDefinitionBlocks: Always
