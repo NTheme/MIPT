@@ -1,0 +1,14 @@
+# --========================================-- #
+#   * Author  : NTheme - All rights reserved
+#   * Created : 1 December 2024, 4:14 AM
+#   * File    : .gitignore
+#   * Project : Salesman
+# --========================================-- #
+
+bin/
+build/
+cmake-build-debug/
+cmake-build-release/
+.idea/
+.vscode/
+.clang-format

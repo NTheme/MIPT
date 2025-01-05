@@ -12,10 +12,10 @@ import random
 
 words = []
 for line in sys.stdin:
-    words.append(line.split('\t')[1].strip())
+    add = line.split('\t')[1].strip()
+    if len(words) < 40:
+        words.append(add)
 
-for _ in range(8):
-    res = []
-    for _ in range(random.randint(1, 5)):
-        res.append(words[random.randint(0, len(words))])
-    print(*res, sep=',')
+for i in range(8):
+    size = random.randint(1, 5)
+    print(*words[i * 5: i * 5 + size], sep=',')
