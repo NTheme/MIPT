@@ -1,0 +1,134 @@
+\section{Билет 11}
+
+\subsection{Удос. Барьерная функция. Метод внутренней точки. Свойства решения барьерной задачи.}
+
+\subsection*{Очередная задача кураторского сектора}
+
+\begin{equation}
+    \begin{aligned}
+         & \max_{x \in \mathbb{R}^d} f(x)                            \\
+         & \text{s.t. } g_i(X) \leq 0, \quad i = 1, \dots, m
+    \end{aligned}
+\end{equation}
+
+Поставим задачу со штрафом:
+
+$$\min_{x \in \mathbb{R}^d} \left[ f_\rho(x) = f(x) + \rho \cdot \frac{1}{2} \sum_{j=1}^{n} (g_j^+(x))^2 \right],$$
+где $y^+ = \max\{y, 0\}$.
+
+Решение такой задачи может не удовлетворять ограничениям, поэтому нужно ввести штраф таким образом, чтобы всегда получать допустимое решение. В качестве бейзлайна поставим барьер:
+
+$$\min_{x \in \mathbb{R}^d} \left[ f_\rho(x) = f(x) + \frac{1}{\rho} \cdot I_G(x) \right],$$
+где $I_G(x)$ – индикаторная функция множества $G$:
+
+$$I_G(x) =
+    \begin{cases}
+        0,       & \text{если } x \in G,    \\
+        +\infty, & \text{если } x \notin G.
+    \end{cases}$$
+
+Задача не стала легче с вычислительной точки зрения, а барьер разрывный и не дифференцируемый.
+Идея –-- воспроизвести поведение индикатора плавно и непрерывно.
+
+\subsection*{Барьерные функции}
+
+Введем ряд предположений на множество $G$, заданное ограничениями:
+\begin{itemize}
+    \item $\text{int} \, G$ — непустое множество;
+    \item Для любой точки $x \in G$ существует последовательность $\{x_i\} \in \text{int} \, G$, такая, что $x_i \to x$;
+    \item $G$ — ограниченное множество;
+    \item Для любого $x \in \text{int} \, G$ и для любого $i = 1, \dots, m$ следует, что $g_i(x) < 0$;
+    \item $f$ непрерывно дифференцируема на $G$.
+\end{itemize}
+
+\begin{definition}
+    Барьером будем называть функцию $F : \mathbb{R}^d \to \mathbb{R}$, удовлетворяющую следующим предположениям:
+    \begin{itemize}
+        \item $F$ непрерывно дифференцируема на $\text{int} \, G$;
+        \item Для любой последовательности $\{x_i\} \in \text{int} \, G$ такой, что $x_i \to x \in \partial G$ (граница множества $G$), выполнено $F(x_i) \to +\infty$.
+    \end{itemize}
+\end{definition}
+
+\begin{example}
+    Приведем несколько примеров барьерных функций:
+    \begin{itemize}
+        \item Барьер Кэррола: $F(x) = -\sum_{i=1}^m \frac{1}{g_i(x)}$;
+        \item Логарифмический барьер: $F(x) = -\sum_{i=1}^m \ln(-g_i(x))$.
+    \end{itemize}
+\end{example}
+
+\section*{\texorpdfstring{\sout{Шизоидные}}{d} Самосогласованные функции}
+
+\begin{definition}
+    Выпуклая трижды непрерывно дифференцируемая на $\text{int}G$ функция называется самосогласованной, если выполнены следующие условия:
+    \begin{itemize}
+        \item $\left|\frac{d^3}{dt^3} F(x + th)\right| \leq 2[h^T \nabla^2 F(x) h]^{3/2}$ для любых $x \in \intr G$ и $h \in \mathbb{R}^d$;
+        \item Для любой последовательности $\{x_i\} \in \text{int}G$ такой, что $x_i \to x \in \partial G$, выполнено «барьерное» свойство: $F(x_i) \to +\infty$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Функция $F$ является $\nu$-самосогласованным барьером ($\nu$ всегда $\geq 1$) на множестве $\intr G$, если:
+    \begin{itemize}
+        \item $F$ самосогласованна на $\text{int}G$;
+        \item Выполнено условие: $|h^T \nabla F(x)| \leq \sqrt{\nu} \sqrt{h^T \nabla^2 F(x) h}$ для любых $x \in \text{int}G$ и $h \in \mathbb{R}^d$.
+    \end{itemize}
+\end{definition}
+
+\begin{algorithm}[H]
+    \caption{Метод внутренней точки (общий случай)}
+    \textbf{Вход:} стартовая точка $x_0 \in \text{int}G$, стартовое значение параметра $\rho^{-1} > 0$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State Увеличить $\rho_k > \rho_{k-1}$
+        \State С помощью некоторого метода решить численно задачу безусловной оптимизации с целевой функцией $F_{\rho_k}$ и стартовой точкой $x_k$. Гарантировать, что выход метода $x_{k+1}$ будет близок к реальному решению $x^*(\rho_k)$.
+        \EndFor
+        \State \textbf{Выход:} $x_K$
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{theorem}
+    Дополнительно к тому, что уже предположено, добавим, что $\mathrm{int}\,G = G$ (замыкание $\mathrm{int}\,G$). Тогда для любого $e > 0$ существует $\rho(e) > 0$ такое, что множество решений барьерной задачи $X^*_\rho$ для любых $\rho \geq \rho(e)$ содержится в
+    $$X^*_e = \{x \in G \mid \exists x^* \in X^*: \|x - x^*\|_2 \leq e\},$$
+    где $X^*$ — множество решений исходной задачи оптимизации с ограничениями вида неравенств.
+
+\end{theorem}
+
+\subsection{Хор. Итерация метода внутренней точки для самосогласованных барьеров.}
+
+\begin{theorem}
+    Пусть $F$ – $\nu$-самосогласованный барьер. Тогда для любых $x, y \in \dom F$ выполнено неравенство
+    $$\langle \nabla F(x), y - x \rangle < \nu.$$
+
+    Если дополнительно известно, что это скалярное произведение неотрицательно, то
+    $$\langle \nabla F(y) - \nabla F(x), y - x \rangle \geq \frac{\langle \nabla F(x), y - x \rangle^2}{\nu - \langle \nabla F(x), y - x \rangle}.$$
+\end{theorem}
+
+\begin{theorem}
+    Пусть $F(x)$ --- $\nu$-самосогласованный барьер. Рассмотрим $x, y \in \dom F$, такие, что выполнено
+    $$\langle \nabla F(x), y - x \rangle \geq 0.$$
+
+    Тогда имеем следующую верхнюю оценку на расстояние между точками:
+    $$\|y - x\|_x \leq \nu + 2\sqrt{\nu}.$$
+\end{theorem}
+
+Введем дополнительные объекты:
+\begin{itemize}
+    \item $\Phi_\rho(x) = \rho F_\rho(x) = \rho c^T x + F(x),$
+    \item $\lambda(\Phi_\rho, x) = \sqrt{\left[\nabla \Phi_\rho(x)\right]^T \left[\nabla^2 \Phi_\rho(x)\right]^{-1} \nabla \Phi_\rho(x)}.$
+\end{itemize}
+
+\begin{algorithm}[H]
+    \caption{Метод внутренней точки (частный случай)}
+    \textbf{Вход:} параметры $e_1, e_2 \in (0; 1)$, стартовое значение параметра $\rho_{-1} > 0$, стартовая точка $x_0 \in \mathrm{int}\,G$ такая, что $\lambda(\Phi_{\rho_{-1}}, x_0) \leq e_1$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State Увеличить $\rho_k = \left(1 + \sqrt{\frac{e_2}{\nu}}\right) \rho_{k-1}$
+        \State Сделать шаг демпфированного метода Ньютона:
+        \[
+            x_{k+1} = x_k - \frac{1}{1 + \lambda(\Phi_{\rho_k}, x_k)} \left[\nabla^2 \Phi_{\rho_k}(x_k)\right]^{-1} \nabla \Phi_{\rho_k}(x_k)
+        \]
+        \EndFor
+        \State \textbf{Выход:} $x_K$
+    \end{algorithmic}
+\end{algorithm}

@@ -1,0 +1,200 @@
+\section{Билет 1}
+
+\subsection{Определение выпуклого множества. Определение выпуклой функции (2):
+    для непрерывно дифференцируемой функции и произвольной функции.
+    Критерий сильной выпуклости дважды непрерывно дифференцируемой
+    функции. Определение сопряженной функции (двойственность по Фенхелю). Лагранжиан. Двойственность по Лагранжу. Двойственная задача. Условия Слейтера. ККТ. Определение классов задач: от LP до SDP.
+    Определение субградиента и субдифференциала.}
+
+\begin{definition}
+    Множество $S \subseteq R^n$ называется \textbf{выпуклым}, если
+    $$\forall x_1, x_2 \in S \forall \theta \in [0, 1]: \theta x_1 + (1 - \theta)x_2 \in S$$.
+\end{definition}
+
+\begin{definition}
+    Пусть $U$ --- вещественное векторное пространство, $Q$ --- непустое выпуклое множество в $U$.
+    Функция $f: Q \rightarrow \mathbb{R}$ называется \textbf{выпуклой},
+    если $$\forall x, y \in Q \, \forall \theta \in [0, 1]: f(\theta x + (1 - \theta y)) \leq \theta f(x) + (1 - \theta) f(y)$$
+\end{definition}
+
+\begin{definition}
+    Если неравенство строгое $\forall x, y \, \forall \theta \in (0, 1)$, то $f$ называется \textbf{строго выпуклой}.
+\end{definition}
+
+\begin{definition}
+    Пусть $U$ --- вещественное векторное пространство, $Q$ --- непустое выпуклое множество в $U$.
+    Непрерывно дифференцируемая функция $f: Q \rightarrow \mathbb{R}$ называется \textbf{выпуклой},
+    если $$\forall x, y \in \dom f: f(y) \geq f(x) + (\nabla f(x), y - x)$$
+\end{definition}
+
+\begin{definition}
+    Если неравенство строгое $\forall x, y \in \dom f$, то $f$ называется \textbf{строго выпуклой}.
+\end{definition}
+
+\begin{theorem}
+    \textnormal{\textbf{Критерий сильной выпуклости второго порядка.}}
+    Пусть $\dom f$ является открытым множеством и функция $f$ дважды дифференцируема на $\dom f$.
+    Функция $f$ является выпуклой тогда и только тогда, когда $\dom f$ является выпуклым множеством и
+    $$\forall x \in \dom f: \nabla^2 f(x) \geq 0$$.
+\end{theorem}
+
+\begin{definition}
+    Let $f: \mathbb{R}^n \rightarrow \mathbb{R}$.
+    Function $f^*: \mathbb{R}^n \rightarrow \mathbb{R}$ is \textbf{сопряженная} to $f$ if
+    $$f^*(y) = \sup\limits_{x \in \mathbb{R}^n} \{ \langle x, y\rangle - f(x)\}$$.
+\end{definition}
+
+\begin{definition}
+    Рассмотрим:
+    \begin{equation}
+        \begin{aligned}
+             & \min_{x} f_0(x)                                        \\
+             & \text{s.t. } f_i(x) \leq 0, \; i = 1, \dots, m,        \\
+             & \phantom{\text{s.t. }} h_j(x) = 0, \; j = 1, \dots, n,
+        \end{aligned}
+    \end{equation}
+    where $x \in\mathbb{R}$.
+    Let $D = \left(\bigcap_{i=0}^m \dom f_i\right) \bigcap \left( \bigcap_{i=0}^m \dom h_i\right)$.
+    Then $$ L(x, \lambda, \nu) = f_0(x) + \sum\limits_{i=1}^m \lambda_i f_i(x) + \sum\limits_{j=1}^m \nu_j h_j(x)$$
+    is called \textbf{Лагранжиан}.
+\end{definition}
+
+\begin{definition}
+    \textbf{Двойственная функция по Лагранжу} --- \( g : \mathbb{R}^m \times \mathbb{R}^n \to \mathbb{R} \) which is agreed with:
+    \begin{equation}
+        g(\lambda, \nu) = \inf_{x \in D} \left( f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{j=1}^n \nu_j h_j(x) \right).
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    \textbf{Двойственная задача}.
+    \begin{equation}
+        \begin{aligned}
+             & \max_{\lambda, \nu} g(\lambda, \nu) \\
+             & \text{s.t. } \lambda \succcurlyeq 0
+        \end{aligned}
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    Рассмотрим задачу следующего вида:
+    \begin{equation}
+        \begin{aligned}
+             & \min_{x} f_0(x)                                 \\
+             & \text{s.t. } f_i(x) \leq 0, \; i = 1, \dots, m, \\
+             & \phantom{\text{s.t. }} Ax = b,
+        \end{aligned}
+        \label{eq:sleiter}
+    \end{equation}
+    где \( f_0, \dots, f_m \) — выпуклые функции. Тогда \textbf{условием Слейтера} называется:
+    $$\exists x \in \operatorname{relint} D: \, f_i(x) < 0, \, i = 1, \dots, m, \quad Ax = b.$$
+\end{definition}
+
+\begin{theorem}
+    \textnormal{\textbf{Слейтера.}} Если для задачи \ref{eq:sleiter} выполняется условие Слейтера,
+    то тогда при построении двойственной задачи выполняется свойство сильной двойственности.
+\end{theorem}
+
+\begin{definition}
+    \textbf{Условия Каркуша-Куни-Рататакера}.
+    \begin{equation}
+        \begin{aligned}
+             & f_i(x^*) \leq 0,                                                                                     & i = 1, \dots, m          \\
+             & h_j(x^*) = 0,                                                                                        & j = 1, \dots, n          \\
+             & \lambda_i^* \geq 0,                                                                                  & i = 1, \dots, m          \\
+             & \lambda_i^* f_i(x^*) = 0,                                                                            & i = 1, \dots, m          \\
+             & \nabla f_0(x^*) + \sum_{i=1}^m \lambda_i^* \nabla f_i(x^*) + \sum_{j=1}^n \nu_j^* \nabla h_j(x^*)= 0 & (\text{или с } \partial)
+        \end{aligned}
+    \end{equation}
+\end{definition}
+
+\section*{Классы задач}
+
+\begin{enumerate}
+    \item \textbf{Linear Programming}
+          Задача линейного программирования в общем виде представима в виде:
+          \begin{equation}
+              \begin{aligned}
+                   & \min_{x \in \mathbb{R}^n} c^\top x, \\
+                   & \text{s.t. } \; Ax = b,             \\
+                   & \phantom{\text{s.t. }} Gx \leq h.
+              \end{aligned}
+          \end{equation}
+
+          Задачей линейного программирования в \textbf{стандартной форме} называется задача вида:
+          \begin{equation}
+              \begin{aligned}
+                   & \min_{x \in \mathbb{R}^n} c^\top x, \\
+                   & \text{s.t. } \; Ax = b,             \\
+                   & \phantom{\text{s.t. }} x \geq 0.
+              \end{aligned}
+          \end{equation}
+
+    \item \textbf{Quadratic Programming}
+          Задача квадратичного программирования.
+          \begin{equation}
+              \begin{aligned}
+                   & \min_{x \in \mathbb{R}^n} \frac{1}{2} x^\top A x + c^\top x \\
+                   & \text{s.t. } Ex = f,                                        \\
+                   & \phantom{\text{s.t. }} Gx \leq h,
+              \end{aligned}
+          \end{equation}
+          где  $A \in S_n^+, E \in \mathbb{R}^{m \times n}, G \in \mathbb{R}^{k \times n}$.
+
+    \item \textbf{Second-Order Conic Programming}
+          Задача с конусами второго порядка (SOCP):
+          \begin{equation}
+              \begin{aligned}
+                   & \min_{x \in \mathbb{R}^n} c^\top x                                                    \\
+                   & \text{s.t. } Ax = b,                                                                  \\
+                   & \phantom{\text{s.t. }} \| G_i x - h_i \|_2 \leq e_i^\top x + f_i, \; i = 1, \dots, M.
+              \end{aligned}
+          \end{equation}
+          где \( A \in \mathbb{R}^{m \times n}, \, G_i \in \mathbb{R}^{k_i \times n}, \; i = 1, \dots, M. \)
+
+          Собственно, последнее ограничение и означает, что пары \( (G_i x - h_i, e_i^\top x + f_i) \) лежат в конусах второго порядка \( K_2 = \left\{ (y, t) \in \mathbb{R}^{k_i} \times \mathbb{R}_+ \mid \| y \| \leq t \right\}. \)
+
+    \item \textbf{Semidefinite Programming}
+          Задача полуопределённого программирования (SDP) в стандартном виде:
+          \begin{equation}
+              \begin{aligned}
+                   & \min_{x \in \mathbb{R}^n} c^\top x                           \\
+                   & \text{s.t. } Ax = b,                                         \\
+                   & \phantom{\text{s.t. }} F_0 + \sum_{i=1}^n F_i x_i \succeq 0,
+              \end{aligned}
+          \end{equation}
+          где \( A \in \mathbb{R}^{m \times n}, \, F_j \in \mathbb{S}_n, \; j = 0, \dots, n. \)
+
+          Стандартная форма SDP:
+          \begin{equation}
+              \begin{aligned}
+                   & \min_{X \in \mathbb{S}_n} \text{tr}(C X)                \\
+                   & \text{s.t. } \text{tr}(A_i X) = b_i, \; i = 1, \dots, m \\
+                   & \phantom{\text{s.t. }} X \succeq 0.
+              \end{aligned}
+          \end{equation}
+
+    \item \textbf{Conic Programming}
+          Заметим, что ограничения \( x \geq 0 \), \( \| x \| \leq t \), \( X \succeq 0 \) — это всё ограничения на то, 
+          что переменная принадлежит конусу. 
+          Оказывается, очень большое число задач выпуклой оптимизации может быть представлено в виде 
+          конического программирования:
+          \begin{equation}
+              \min_{x \in K} \langle x, c \rangle
+          \end{equation}
+          \text{s.t. } \( A x = b \),
+          где \( K \) — некоторый выпуклый конус в некотором гильбертовом пространстве \( H_1 \), \( A : H_1 \to H_2 \) — некоторый ограниченный линейный оператор.
+\end{enumerate}
+
+\begin{definition}
+    Пусть на множестве $S$ в евклидовом пространстве $V$ определена функция $f : S \to \mathbb{R}$. 
+    \textbf{Субградиентом} функции $f$ в точке $x_0 \in S$ называется вектор $g \in V$ такой, что
+    $$f(x) \geq f(x_0) + \langle g, x - x_0 \rangle, \quad \forall x \in S.$$
+\end{definition}
+
+\begin{definition}
+    Пусть на множестве $S$ в евклидовом пространстве $V$ определена функция $f : S \to \mathbb{R}$. 
+    Множество всех субградентов функции в точке $x_0$ называется \textbf{субдифференциалом} функции $f$ в точке $x_0$ и 
+    обозначается $\partial f(x_0)$:
+$$\partial f(x_0) = \{ g \in V \mid f(x) \geq f(x_0) + \langle g, x - x_0 \rangle, \quad \forall x \in S \}.$$
+\end{definition}

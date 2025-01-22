@@ -1,0 +1,100 @@
+\section{Билет 10}
+
+\subsection{Удос. Седловая задача. Итерация метода экстраградиента. Почему лучше, чем градиентный спуск–подъем. Характер сходимости
+    для сильно выпуклых и сильно вогнутых гладких задач.}
+
+\subsection*{Седловая задачка}
+
+\begin{equation}
+    \begin{aligned}
+         & \min_{x} f_0(x)                                 \\
+         & \text{s.t. } f_i(x) \leq 0, \; i = 1, \dots, m, \\
+         & \phantom{\text{s.t. }} Ax = b,
+    \end{aligned}
+    \label{eq:horse}
+\end{equation}
+
+\begin{definition}
+    Точка $(x^*, \lambda^*, \nu^*) \in \mathbb{R}^d \times \mathbb{R}_+^m \times \mathbb{R}^n$ называется седловой
+    для функции $L(x, \lambda, \nu)$, если для любых
+    $(x, \lambda, \nu) \in \mathbb{R}^d \times \mathbb{R}_+^m \times \mathbb{R}^n$ выполнено
+    $$L(x, \lambda^*, \nu^*) \geq L(x^*, \lambda^*, \nu^*) \geq L(x^*, \lambda, \nu).$$
+\end{definition}
+
+\begin{theorem}
+    Пусть $X$, $\Lambda$ выпуклые множества, и $X$ или $\Lambda$ дополнительно компактно,
+    пусть также $L : X \times \Lambda \to \mathbb{R}$ непрерывна, выпукла по $x$ (для любого фиксированного $\lambda$) и
+    вогнута по $\lambda$ (для любого фиксированного $x$). Тогда (гарантий существования тут нет)
+    $$\sup_{\lambda \in \Lambda} \inf_{x \in X} L(x, \lambda) = \inf_{x \in X} \sup_{\lambda \in \Lambda} L(x, \lambda).$$
+\end{theorem}
+
+\subsection*{Метод градиентного спуска-подъема}
+
+Оптимизация функции Лагранжа — седловая задача. Седловые задачи возникают как отдельный большой класс задач. Будем рассматривать следующую задачу:
+$$\min_{x \in \mathbb{R}^d} \max_{\lambda \in \mathbb{R}^d} L(x, \lambda),$$
+где $L$ непрерывно дифференцируема по обеим группам переменных, выпукла по $x$ (для любого фиксированного $\lambda$) и вогнута по $\lambda$ (для любого фиксированного $x$), а также градиенты по обеим группам переменных являются $L/\sqrt{2}$-Липшицевыми:
+$$\| \nabla_x L(x_1, \lambda_1) - \nabla_x L(x_2, \lambda_2) \|_2^2 \leq \frac{L^2}{2} \left( \| x_1 - x_2 \|_2^2 + \| \lambda_1 - \lambda_2 \|_2^2 \right)$$
+$$\| \nabla_\lambda L(x_1, \lambda_1) - \nabla_\lambda L(x_2, \lambda_2) \|_2^2 \leq \frac{L^2}{2} \left( \| x_1 - x_2 \|_2^2 + \| \lambda_1 - \lambda_2 \|_2^2 \right)$$
+
+\begin{algorithm}[H]
+    \caption{Метод одновременного градиентного спуска-подъема (SimGDA)}
+    \textbf{Вход:} размер шага $\gamma > 0$, стартовая точка $[x_0, \lambda_0] \in \mathbb{R}^{d+n}$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State $x_{k+1} = x_k - \gamma \nabla_x L(x_k, \lambda_k)$
+        \State $\lambda_{k+1} = \lambda_k + \gamma \nabla_\lambda L(x_k, \lambda_k)$
+        \EndFor
+        \State \textbf{Выход:} $x_K, \lambda_K$
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Метод поочередного градиентного спуска-подъема (AltGDA)}
+    \textbf{Вход:} размер шага $\gamma > 0$, стартовая точка $[x_0, \lambda_0] \in \mathbb{R}^{d+n}$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State $x_{k+1} = x_k - \gamma \nabla_x L(x_k, \lambda_k)$
+        \State $\lambda_{k+1} = \lambda_k + \gamma \nabla_\lambda L(x_{k+1}, \lambda_k)$
+        \EndFor
+        \State \textbf{Выход:} $x_K, \lambda_K$
+    \end{algorithmic}
+\end{algorithm}
+
+К сожалению, метод градиентного спуска-подъема (и одновременный, и поочередный) порой не cходится в не сильно выпуклых-сильно
+вогнутых задачах.
+
+\subsection*{Экстраградиентный метод}
+
+В некоторой точке $(x_k, \lambda_k)$, алгоритм делает одновременный спуск-подъем в промежуточную точку
+$(x_{k+1/2}, \lambda_{k+1/2})$. Затем, алгоритм делает одновременный спуск-подъем из точки $(x_k, \lambda_k)$,
+используя градиенты в $(x_{k+1/2}, \lambda_{k+1/2})$. Обычный градиентный спуск-подъем любит расходиться.
+Более того, если алгоритм и сходится, то делает это в виде вихря, что сильно замедляет сходимость.
+Экстраградиентный метод решает это толчком в направлении решения, используя для движения градиенты не из текущей точки,
+а из следующей.
+
+\begin{algorithm}[H]
+    \caption{Экстраградиентный метод}
+    \textbf{Вход:} размер шага $\gamma > 0$, стартовая точка $[x_0, \lambda_0] \in \mathbb{R}^{d+n}$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State $x_{k+1/2} = x_k - \gamma \nabla_x L(x_k, \lambda_k)$
+        \State $\lambda_{k+1/2} = \lambda_k + \gamma \nabla_\lambda L(x_k, \lambda_k)$
+        \State $x_{k+1} = x_k - \gamma \nabla_x L(x_{k+1/2}, \lambda_{k+1/2})$
+        \State $\lambda_{k+1} = \lambda_k + \gamma \nabla_\lambda L(x_{k+1/2}, \lambda_{k+1/2})$
+        \EndFor
+        \State \textbf{Выход:} $\frac{1}{K} \sum_{k=0}^{K-1} x_{k+1/2}, \frac{1}{K} \sum_{k=0}^{K-1} \lambda_{k+1/2}$
+    \end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Хор. Формулировка оценки сходимости метода экстраградиента для сильно выпуклых –
+    сильно вогнутых гладких задач.}
+
+\begin{theorem}
+    Пусть дана непрерывно дифференцируемая по обеим группам переменных выпукло-вогнутая L-гладкая функция
+    $L : \mathbb{R}^d \times \mathbb{R}^n \to \mathbb{R}$,
+    тогда для экстраградиентного метода справедлива следующая оценка сходимости для любого
+    $u \in \mathbb{R}^d \times \mathbb{R}^n$ и для любого $\gamma \leq \frac{1}{L}$:
+    $$\left( L \left( \frac{1}{K} \sum_{k=0}^{K-1} x_{k+1/2}, u_\lambda \right) - L \left( u_x, \frac{1}{K} \sum_{k=0}^{K-1} \lambda_{k+1/2} \right) \right) \leq \frac{\|z_0 - u\|_2^2}{2\gamma K}$$
+\end{theorem}
+

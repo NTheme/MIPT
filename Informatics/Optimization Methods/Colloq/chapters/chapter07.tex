@@ -1,0 +1,187 @@
+\section{Билет 7}
+
+\subsection{УДОД ФПМИ. Итерация метода субградиентного спуска. Интуиция метода. Характер
+    сходимости. Адаптивные методы: AdaGradNorm, AdaGrad, RMSProp, Adam,
+    AdamW. Интуиции методов. Композитная задача. Итерация проксимального метода. Интуиция метода. Характер сходимости.}
+
+\subsection*{Субградиентный метод}
+
+\begin{algorithm}[ht]
+    \caption{Субградиентный метод}
+    \textbf{Вход:} размеры шага $\gamma > 0$, стартовая точка $x_0 \in \mathbb{R}^d$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State Вычислить $g_k \in \partial f(x_k)$
+        \State $x_{k+1} = x_k - \gamma g_k$
+        \EndFor
+    \end{algorithmic}
+    \textbf{Выход:} $\frac{1}{K} \sum_{k=0}^{K} x_k$
+\end{algorithm}
+
+Характер сходимости --- сублинейная.
+
+\subsection*{1000 и один алгоритм}
+
+\begin{enumerate}
+    \item \textbf{AdaGradNorm}
+          Для субградиентного метода был взят шаг $\gamma = \frac{\|x_0 - x^*\|^2}{M \sqrt{K}}$. Но как заменить его более практично — убрать $M$, $K$ и $\|x_0 - x^*\|^2$, не теряя их физический смысл? Возьмем
+          $$ \gamma_k = \frac{D}{\sqrt{\sum_{t=0}^k \|g_t\|_2^2 + \epsilon}}, \quad \|x_0 - x^*\|^2 \leq D, $$
+          где $D$ — некоторая константа.
+
+          \begin{algorithm}[H]
+              \caption{AdaGradNorm}
+              \textbf{Вход:} шаг $D > 0$, стартовая точка $x_0 \in \mathbb{R}^d$, сумма квадратов норм градиентов $G^{-1} = 0$, параметр сглаживания $\epsilon = 1e-8$, количество итераций $K$
+              \begin{algorithmic}[1]
+                  \For{$k = 0, 1, \dots, K - 1$}
+                  \State вычислить $g_k \in \partial f(x_k)$
+                  \State вычислить $G_k = G_{k-1} + \|g_k\|_2^2$
+                  \State $x_{k+1} = x_k - \frac{D}{\sqrt{G_k + \epsilon}} g_k$
+                  \EndFor
+              \end{algorithmic}
+              \textbf{Выход:} $\frac{1}{K} \sum_{k=0}^{K-1} x_k$
+          \end{algorithm}
+
+    \item \textbf{AdaGrad}
+          Для того, чтобы получился AdaGrad, надо сделать индивидуальный шаг для каждой координаты:
+          $$\gamma_{k,i} = \frac{\sqrt{D_i}}{\sqrt{\sum_{t=0}^{k} (g_{t,i})^2 + \epsilon}}, \quad \|x_i - x_i^*\|_2 \leq D_i.$$
+
+          \begin{algorithm}[H]
+              \caption{AdaGrad}
+              \textbf{Вход:} шаг $D_i > 0$, стартовая точка $x_0 \in \mathbb{R}^d$, сумма квадратов градиентов $G_i^{-1} = 0$, параметр сглаживания $\epsilon = 1e-8$, количество итераций $K$
+              \begin{algorithmic}[1]
+                  \For{$k = 0, 1, \dots, K - 1$}
+                  \State Вычислить $g_k \in \partial f(x_k)$
+                  \For{каждой координаты}
+                  \State $G_k^i = G_{k-1}^i + (g_k^i)^2$
+                  \EndFor
+                  \For{каждой координаты}
+                  \State $x_{k+1}^i = x_k^i - \frac{D_i}{\sqrt{G_k^i + \epsilon}} g_k^i$
+                  \EndFor
+                  \EndFor
+              \end{algorithmic}
+              \textbf{Выход:} $\frac{1}{K} \sum_{k=0}^K x_k$
+          \end{algorithm}
+
+    \item \textbf{RMS Prop}
+          \begin{algorithm}[H]
+              \caption{RMSProp}
+              \textbf{Вход:} шаг $D_i > 0$, параметр сглаживания $\gamma \in [0, 1]$, стартовая точка $x_0 \in \mathbb{R}^d$, сглаженная сумма квадратов градиентов $G_i^{-1} = 0$, параметр сглаживания $\epsilon = 1e-8$, количество итераций $K$
+              \begin{algorithmic}[1]
+                  \For{$k = 0, 1, \dots, K - 1$}
+                  \State Вычислить $g_k \in \partial f(x_k)$
+                  \For{каждой координаты}
+                  \State $G_k^i = \gamma G_{k-1}^i + (1 - \gamma)(g_k^i)^2$
+                  \EndFor
+                  \For{каждой координаты}
+                  \State $x_{k+1}^i = x_k^i - \frac{D_i}{\sqrt{G_k^i + \epsilon}} g_k^i$
+                  \EndFor
+                  \EndFor
+              \end{algorithmic}
+              \textbf{Выход:} $\frac{1}{K} \sum_{k=0}^K x_k$
+          \end{algorithm}
+
+    \item \textbf{Adam} i Eva
+          \begin{algorithm}[H]
+              \caption{Adam}
+              \textbf{Вход:} шаг $D_i > 0$, параметры сглаживания $\beta_1 = 0.9$ и $\beta_2 = 0.99$, стартовая точка $x_0 \in \mathbb{R}^d$, сглаженная сумма квадратов градиентов $G_i^{-1} = 0$, сглаженная сумма градиентов $v^{-1} = 0$, параметр сглаживания $\epsilon = 1e-8$, количество итераций $K$
+              \begin{algorithmic}[1]
+                  \For{$k = 0, 1, \dots, K - 1$}
+                  \State Вычислить $g_k \in \partial f(x_k)$
+                  \State Вычислить $v_k = \beta_1 v_{k-1} + (1 - \beta_1) g_k$
+                  \State Вычислить $\hat{v}_k = \frac{v_k}{1 - \beta_1^{k+1}}$
+                  \For{каждой координаты}
+                  \State $G_k^i = \beta_2 G_{k-1}^i + (1 - \beta_2) (g_k^i)^2$
+                  \EndFor
+                  \State Вычислить $\hat{G}_k = \frac{G_k}{1 - \beta_2^{k+1}}$
+                  \For{каждой координаты}
+                  \State $x_{k+1}^i = x_k^i - \frac{D_i}{\sqrt{\hat{G}_k^i + \epsilon}} \hat{v}_k^i$
+                  \EndFor
+                  \EndFor
+              \end{algorithmic}
+              \textbf{Выход:} $\frac{1}{K} \sum_{k=0}^K x_k$
+          \end{algorithm}
+
+    \item \textbf{AdamW} i God save us\dots
+          Для получения AdamW добавляется $l_2$-регуляризация неявным образом,
+          напрямую в оптимизатор и минуя адаптивный размер шага.
+          Это сделано для того, чтобы эффект $l_2$-регуляризации не затухал со
+          временем и обобщающая способность модели была выше.
+
+          \begin{note}
+              Отмечается, что этот алгоритм особо не используется. То есть, на кой черт его придумали???
+          \end{note}
+
+          \begin{algorithm}[H]
+              \caption{AdamW}
+              \textbf{Вход:} шаг $D_i > 0$, параметры сглаживания $\beta_1 = 0.9$ и $\beta_2 = 0.99$, параметр регуляризации $\lambda$, стартовая точка $x_0 \in \mathbb{R}^d$, сглаженная сумма квадратов градиентов $G_i^{-1} = 0$, сглаженная сумма градиентов $v^{-1} = 0$, параметр сглаживания $\epsilon = 1e-8$, количество итераций $K$
+              \begin{algorithmic}[1]
+                  \For{$k = 0, 1, \dots, K - 1$}
+                  \State Вычислить $g_k \in \partial f(x_k)$
+                  \State Вычислить $v_k = \beta_1 v_{k-1} + (1 - \beta_1) g_k$
+                  \State Вычислить $\hat{v}_k = \frac{v_k}{1 - \beta_1^{k+1}}$
+                  \For{каждой координаты}
+                  \State $G_k^i = \beta_2 G_{k-1}^i + (1 - \beta_2) (g_k^i)^2$
+                  \EndFor
+                  \State Вычислить $\hat{G}_k = \frac{G_k}{1 - \beta_2^{k+1}}$
+                  \For{каждой координаты}
+                  \State $x_{k+1}^i = x_k^i - \frac{D_i}{\sqrt{\hat{G}_k^i + \epsilon}} \hat{v}_k^i - \lambda x_k^i$
+                  \EndFor
+                  \EndFor
+              \end{algorithmic}
+              \textbf{Выход:} $\frac{1}{K} \sum_{k=0}^K x_k$
+          \end{algorithm}
+\end{enumerate}
+
+\subsection*{Проксимальный метод}
+
+Негладкие задачи \guillemetleft более сложные\guillemetright, по сравнению с гладкими задачами.
+Может быть получится \guillemetleft спрятать\guillemetright \, отсутствие гладкости?
+Такую возможность дает проксимальный оператор
+
+\begin{definition}
+    Для функции \( r : \mathbb{R}^d \to \mathbb{R} \cup \{+\infty\} \) проксимальный оператор определяется следующим образом:
+    $$\text{prox}_r(x) = \arg \min_{\tilde{x} \in \mathbb{R}^d} \left( r(\tilde{x}) + \frac{1}{2} \|x - \tilde{x}\|^2 \right)$$
+\end{definition}
+
+\begin{algorithm}[H]
+    \caption{Проксимальный градиентный метод}
+    \textbf{Вход:} размер шага $\gamma > 0$, стартовая точка $x_0 \in \mathbb{R}^d$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State $x_{k+1} = \text{prox}_{\gamma r}(x_k - \gamma \nabla f(x_k))$
+        \EndFor
+    \end{algorithmic}
+    \textbf{Выход:} $x_K$
+\end{algorithm}
+
+Характер сходимости --- линейная.
+
+\subsection{Ор. Формулировка оценки сходимости субградиентного спуска для выпуклых задач с Липшицевой функцией.
+    Формулировка свойств проксимального метода.}
+
+\begin{theorem}
+    Пусть задача безусловной оптимизации с М-Липшицевой, выпуклой целевой функцией $f$ решается с помощью субградиентного спуска. Тогда справедлива следующая оценка сходимости:
+    $$ f\left( \frac{1}{K} \sum_{k=0}^{K-1} x_k \right) - f(x^*) \leq \frac{M \|x_0 - x^*\|_2}{\sqrt{K}}. $$
+
+    Более того, чтобы добиться точности $\epsilon$ по функции, необходимо
+    $$ K = O\left( \frac{M^2 \|x_0 - x^*\|_2^2}{\epsilon^2} \right) $$ итераций.
+\end{theorem}
+
+\begin{theorem}
+    Пусть $r: \mathbb{R}^d \to \mathbb{R} \cup \{+\infty\}$ выпуклая функция, для которой определен $prox_r$.
+    Тогда для любых $x, y \in \mathbb{R}^d$ следующие три условия являются эквивалентными:
+    \begin{itemize}
+        \item $prox_r(x) = y$,
+        \item $x - y \in \partial r(y)$,
+        \item $\langle x - y, z - y \rangle \leq r(z) - r(y)$ для любого $z \in \mathbb{R}^d$.
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}
+    Пусть задача композитной оптимизации (87) с $L$-гладкой, $\mu$-сильно выпуклой целевой функцией $f$ и выпуклой (необязательно гладкой, но) проксимально дружественной функцией $r$ решается с помощью проксимального градиентного спуска.
+    Тогда при $\gamma_k = \frac{1}{L}$ справедлива следующая оценка сходимости:
+    $$ \|x_K - x^*\|^2 \leq \left( 1 - \frac{\mu}{L} \right)^K \|x_0 - x^*\|_2^2. $$
+    Более того, чтобы добиться точности $\varepsilon$ по аргументу ($\|x_k - x^*\|_2 \leq \varepsilon$), необходимо
+    $$ K = O\left( \frac{L}{\mu} \log \frac{\|x_0 - x^*\|_2}{\varepsilon} \right) = \tilde{O}\left( \frac{L}{\mu} \right) $$
+    итераций.
+\end{theorem}

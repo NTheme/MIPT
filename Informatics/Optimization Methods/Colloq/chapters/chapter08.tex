@@ -1,0 +1,78 @@
+\section{Билет 8}
+
+\subsection{Удосик. Евклидова проекция. Итерация метода градиентного спуска с проекцией.
+    Интуиция метода. Характер сходимости для гладких сильно выпуклых
+    задач. Итерация метода Франк-Вульфа. Интуиция метода. Характер сходимости для гладких выпуклых задач.}
+
+\begin{definition}
+    \textbf{Евклидова проекция} --- $\Pi_X(x) := \arg \min_{y \in X} \frac{1}{2} \|x - y\|^2_2.$
+\end{definition}
+
+\begin{theorem}
+    Для выпуклого замкнутого множества $X$ и любой точки оператор проекции существует и принимает единственное значение.
+\end{theorem}
+
+\begin{theorem}
+    Пусть $X \subseteq \mathbb{R}^d$ — выпуклое замкнутое множество, $y \in X$, $x \in \mathbb{R}^d$. Тогда
+    $$\langle y - \Pi_X(x), x - \Pi_X(x) \rangle \leq 0.$$
+\end{theorem}
+
+\begin{theorem}
+    Пусть $X \subseteq \mathbb{R}^d$ — выпуклое замкнутое множество, $x_1, x_2 \in \mathbb{R}^d$. Тогда
+    $$\| \Pi_X(x_1) - \Pi_X(x_2) \|^2 \leq \|x_1 - x_2\|^2.$$
+\end{theorem}
+
+\begin{theorem}
+    Для $x^*$ – решения условной задачи минимизации выпуклой непрерывно дифференцируемой функции $f$
+    на выпуклом замкнутом множестве $X$, справедливо
+    $$x^* = \Pi_X(x^* - \gamma \nabla f(x^*)).$$
+\end{theorem}
+
+\subsection*{Градиентный спуск с прокцией}
+
+\begin{algorithm}[H]
+    \caption{Градиентный спуск с проекцией}
+    \textbf{Вход:} размеры шагов $\{\gamma_k\}_{k=0} > 0$, стартовая точка $x_0 \in \mathbb{R}^d$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State Вычислить $\nabla f(x_k)$
+        \State $x_{k+1} = \Pi_X \left[ x_k - \gamma_k \nabla f(x_k) \right]$
+        \EndFor
+    \end{algorithmic}
+    \textbf{Выход:} $x_K$
+\end{algorithm}
+
+\subsection*{Франк-Вульфрикович}
+
+\begin{algorithm}[H]
+    \caption{Метод Франк-Вульфа}
+    \textbf{Вход:} стартовая точка $x_0 \in \mathbb{R}^d$, количество итераций $K$
+    \begin{algorithmic}[1]
+        \For{$k = 0, 1, \dots, K - 1$}
+        \State Вычислить $\nabla f(x_k)$
+        \State Найти $s_k = \arg \min_{s \in X} \langle s, \nabla f(x_k) \rangle$
+        \State $\gamma_k = \frac{2}{k+2}$
+        \State $x_{k+1} = (1 - \gamma_k)x_k + \gamma_k s_k$
+        \EndFor
+    \end{algorithmic}
+    \textbf{Выход:} $x_K$
+\end{algorithm}
+
+
+\subsection{Хорек. Формулировка свойств оператора
+    проекции. Формулировка оценки сходимости метода Франк-Вульфа.}
+
+\begin{theorem}
+    Пусть задача на ограниченном выпуклом множестве (81) с $L$-гладкой, $\mu$-сильно выпуклой целевой функцией $f$ решается с помощью градиентного спуска с проекцией. Тогда при $\gamma_k = \frac{1}{L}$ справедлива следующая оценка сходимости:
+    $$\|x_K - x^*\|_2^2 \leq \left( 1 - \frac{\mu}{L} \right)^K \|x_0 - x^*\|_2^2.$$
+
+    Более того, чтобы добиться точности $\epsilon$ по аргументу ($\|x_k - x^*\|_2 \leq \epsilon$), необходимо
+    $$K = O \left( \frac{L}{\mu} \log \frac{\|x_0 - x^*\|_2^2}{\epsilon} \right) = \tilde{O} \left( \frac{L}{\mu} \right)$$
+    итераций.
+\end{theorem}
+
+\begin{theorem}
+    Пусть дана непрерывно дифференцируемая выпуклая L-гладкая функция $f : \mathbb{R}^d \to \mathbb{R}$, тогда для метода Франк-Вульфа справедлива следующая оценка сходимости:
+    $$f(x_K) - f(x^*) \leq \frac{2 \max\left\{ L \, diam(X)^2, f(x_0) - f(x^*) \right\}}{K + 2},$$
+    где $diam(X) := \max_{x, y \in X} \|x - y\|_2$ –-- диаметр множества $X$.
+\end{theorem}

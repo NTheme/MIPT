@@ -1,0 +1,222 @@
+\documentclass{disser}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{multirow}
+\usepackage{lastpage}
+\usepackage{systeme}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{csquotes}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{algpseudocode}
+\usepackage{mathrsfs}
+
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{intersections}
+\usepgfplotslibrary{fillbetween}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Определение}
+\theoremstyle{definition}
+\newtheorem*{proposition}{Предложение}
+\theoremstyle{definition}
+\newtheorem{problem}{Задача}
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+\theoremstyle{remark}
+\newtheorem*{solution}{Решение}
+\theoremstyle{definition}
+\newtheorem*{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem*{hypothesis}{Гипотеза}
+\theoremstyle{definition}
+\newtheorem*{theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem*{lemma}{Лемма}
+
+\usepackage[toc,page]{appendix}
+\usepackage{hyperref}
+
+\usepackage{geometry}
+\geometry{left=1.5cm}
+\geometry{right=1.5cm}
+\geometry{top=2.0cm}
+\geometry{bottom=3.0cm}
+\renewcommand{\baselinestretch}{1.0}
+
+\usepackage{algorithm2e}
+\RestyleAlgo{ruled}
+\SetAlgoVlined
+\renewcommand{\thealgocf}{Add}
+
+%https://tex.stackexchange.com/questions/163451/total-number-of-citations
+\usepackage{totcount}
+\newtotcounter{citnum} %From the package documentation
+\def\oldbibitem{} \let\oldbibitem=\bibitem
+\def\bibitem{\stepcounter{citnum}\oldbibitem}
+
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1.~#2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1.~#2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother
+
+\reversemarginpar
+
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=ynt
+]{biblatex}
+% Не работает в TeXstudio
+%\addbibresource{chapters/*/main.bib}
+\addbibresource{chapters/general/main.bib}
+\addbibresource{chapters/linear/main.bib}
+\addbibresource{chapters/neural/main.bib}
+\addbibresource{chapters/metric/main.bib}
+\addbibresource{chapters/svm/main.bib}
+\addbibresource{chapters/pca/main.bib}
+\addbibresource{chapters/nonlinear/main.bib}
+\addbibresource{chapters/general_linear/main.bib}
+\addbibresource{chapters/nonstandart_error/main.bib}
+\addbibresource{chapters/feature_selection/main.bib}
+\addbibresource{chapters/logical/main.bib}
+\addbibresource{chapters/rules/main.bib}
+\addbibresource{chapters/mixture/main.bib}
+\addbibresource{chapters/boosting/main.bib}
+\addbibresource{chapters/bayesian/main.bib}
+\addbibresource{chapters/clustering/main.bib}
+\addbibresource{chapters/unlabeled/main.bib}
+\addbibresource{chapters/anomalies/main.bib}
+
+\begin{document}
+% Титульный лист
+\input{title}
+
+\setcounter{page}{2}
+
+% Оглавление
+\newpage
+\tableofcontents
+    
+    \clearpage
+    \chapter{Общие термины и обозначения}
+    \input{chapters/general/main}
+
+    \clearpage
+    \chapter{Линейные методы классификации и регрессии}
+    \input{chapters/linear/main}
+
+    \clearpage
+    \chapter{Основы нейросетевых моделей}
+    \input{chapters/neural/main}
+        
+    \clearpage
+    \chapter{Метрические методы классификации и регрессии}
+    \input{chapters/metric/main}
+
+    \clearpage
+    \chapter{Метод опорных векторов}
+    \input{chapters/svm/main}
+
+    \clearpage
+    \chapter{Метод главных компонент}
+    \input{chapters/pca/main}
+
+    \clearpage
+    \chapter{Нелинейные модели машинного обучения}
+    \input{chapters/nonlinear/main}
+
+    \clearpage
+    \chapter{Обобщенные линейные модели}
+    \input{chapters/general_linear/main}
+
+    \clearpage
+    \chapter{Нестандартные функции потерь}
+    \input{chapters/nonstandart_error/main}
+
+    \clearpage
+    \chapter{Критерии выбора моделей}
+    \input{chapters/model_selection/main}
+
+    \clearpage
+    \chapter{Методы отбора признаков}
+    \input{chapters/feature_selection/main}
+
+    \clearpage
+    \chapter{Логические методы классификации}
+    \input{chapters/logical/main}
+
+    \clearpage
+    \chapter{Поиск ассоциативных правил}
+    \input{chapters/rules/main}
+
+    \clearpage
+    \chapter{Композиции классификаторов}
+    \input{chapters/mixture/main}
+
+    \clearpage
+    \chapter{Ансамблирования классификаторов}
+    \input{chapters/ensembles/main}
+
+    \clearpage
+    \chapter{Методы бустинга}
+    \input{chapters/boosting/main}
+
+    \clearpage
+    \chapter{Байесовская теория классификации}
+    \input{chapters/bayesian/main}
+
+    \clearpage
+    \chapter{Методы кластеризации}
+    \input{chapters/clustering/main}
+
+    \clearpage
+    \chapter{Обучение на неразмеченных данных}
+    \input{chapters/unlabeled/main}
+
+    \clearpage
+    \chapter{Квазилинейные классификаторы}
+    \input{chapters/semilinclass/main}
+
+    \clearpage
+    \chapter{Детекция аномалий}
+    \input{chapters/anomalies/main}
+
+    \clearpage
+    \chapter{Индекс Джини}
+    \input{chapters/gini/main}
+
+
+    % Bibliography
+    \clearpage
+    \printbibliography
+\end{document}

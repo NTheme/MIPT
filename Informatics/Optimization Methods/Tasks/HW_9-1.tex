@@ -1,0 +1,126 @@
+\documentclass[a5paper,twoside,russian]{article}
+\usepackage[intlimits]{amsmath}
+\usepackage{amsthm,amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[final]{graphicx,epsfig}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english]{babel}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{enumitem}
+\renewcommand{\alph}[1]{\asbuk{#1}}
+\setenumerate[1]{label=\alph*), fullwidth, itemindent=\parindent, listparindent=\parindent}
+\setenumerate[2]{label=\arabic*), fullwidth, itemindent=\parindent, listparindent=\parindent, leftmargin=\parindent}
+\usepackage{mathtools}
+
+\usepackage{rmathbr}  % для автопереносов
+\usepackage{setspace} % увеличение межстрочного расстояния
+
+\usepackage{thmtools}
+\renewcommand{\qed}{$\hfill\blacksquare$}
+\declaretheorem{definition}
+\declaretheoremstyle[%
+    spaceabove=-6pt,%
+    spacebelow=6pt,%
+    headfont=\normalfont\itshape,%
+    postheadspace=1em,%
+    qed=\qedsymbol,%
+    headpunct={}
+]{myStyle}
+\declaretheorem[name={$\blacktriangle$},style=myStyle,unnumbered,
+]{prf}
+
+\hoffset=-10.4mm \voffset=-12.4mm \oddsidemargin=5mm \evensidemargin=0mm \topmargin=0mm \headheight=0mm \headsep=0mm
+\textheight=174mm \textwidth=113mm
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\dom}{dom}
+\newcommand{\Tr}{\operatorname{Tr}}
+
+\begin{document}
+    \selectlanguage{russian}
+    \begin{center}
+        \textbf{Домашнее задание 9, ККТ}
+    \end{center}
+    \begin{center}
+        \textbf{Deadline - 15.11.2024 в 23:59}
+    \end{center}
+
+    \section*{Основная часть}
+
+    \begin{enumerate}[label=\textbf{Задача \arabic*.}]
+
+        \item (2 балла)
+
+        \begin{align*}
+            \min_{\theta, \theta_0, \xi} &~ \frac{1}{2}\|\theta\|_2^2 + \rho\sum\limits_{i = 1}^{n}\xi_i\\
+            \text{s.t. } \xi_i \geq 0, &~ y_i(x_i^\top \theta + \theta_0) \geq 1 - \xi_i
+        \end{align*}
+
+        Выпишите условия ККТ для этой задачи.
+        Выразите параметр $\theta$ через оптимальное решение двойственной задачи.
+        Покажите, что оптимальное решение не изменится, если оставить только точки $x_i$,
+        для которых $y_i(x_i^\top \theta + \theta_0) = 1 - \xi_i$ (\emph{опорные векторы}).
+
+        \begin{prf}
+            $ \mathcal{L} (\theta, \theta_0, \xi, \lambda, \eta) =
+            \frac12 ||\theta||_2^2 + \rho \sum\limits_{i=1}^{n}\xi_i +
+            \sum\limits_{i=1}^{n}\lambda_i \left(1 - \xi_i - y_i \left( x_i^T \theta + \theta_0 \right) \right) -
+            \sum\limits_{i=1}^{n} \eta_i \xi_i $
+
+            \[
+                \text{KKT:}
+                \left\{\!
+                \begin{array}{l}
+                    \frac{\partial}{\partial \theta} \mathcal{L} = \theta - \sum\limits_{i=1}^{n} \lambda_i y_i x_i = 0 \\
+                    \frac{\partial}{\partial \theta_0} \mathcal{L} = -\sum\limits_{i=1}^{n} \lambda_i y_i = 0           \\
+                    \frac{\partial}{\partial \xi_i} \mathcal{L} = \rho - \lambda_i + \eta_i = 0                         \\
+                    \lambda_i \geq 0                                                                                    \\
+                    \eta_i \geq 0                                                                                       \\
+                    \xi_i \geq 0                                                                                        \\
+                    y_i \left( x_i^T \theta + \theta_0 \right) - 1 + \xi_i \geq 0                                       \\
+                    \lambda_i \left( y_i \left( x_i^T \theta + \theta_0 \right) - 1 + \xi_i \right) = 0                 \\
+                    \eta_i\xi_i = 0                                                                                     \\
+                \end{array}
+                \!\right.
+            \]
+            Тогда: $ \theta = \sum\limits_{i=1}^{n} \lambda_i^* y_i x_i$, где $\lambda_i^*$ - оптимальное решение двойственной задачи.
+
+            Если оставить только те условия, где $y_i(x_i^\top \theta + \theta_0) = 1 - \xi_i$, то по условиям дополняющей нежесткости
+            для остальных $\lambda_i^* = 0$, а значит сумму не меняет, следовательно, можно их выкинуть.
+        \end{prf}
+
+        \item (3 балла) Пусть $f$ -- сильно выпуклая дифференцируемая на $\mathbb{R}^n$ функция,
+        матрица $A \in \mathbb{R}^{n \times d}$ такова, что все ее миноры имеют полный ранг.
+
+
+        Докажите, что задача с $\ell_1$ регуляризацией
+        \begin{align*}
+            \min_{x \in \mathbb{R}^d} \bigg[f(Ax) + \|x\|_1\bigg]
+        \end{align*}
+        имеет единственное решение, при чем среди его компонент не более $\min(n, d)$ ненулевых.
+
+        \begin{prf}
+            Так как $f(x)$ - сильно выпуклая, а $\ell_1$ - выпуклая, то сумма этих функций является сильно выпуклой функцией
+            ($\ell_1$ не меняет константу выпуклости так как добавляет не менее 0 ко второму дифференциалу или не менее 0
+            к первому в зависимости от того, какой критерий применить).
+            Значит, решение задачи единственно в силу единственности минимума у строго выпуклой функции.
+
+            Если $n \geq d$, то тривиально: не можем занулить переменных больше, чем их есть.
+            
+            Иначе у нас остаются свободные переменные и множество решений имеет размерность $d - n$, потому мы можем занулить
+            часть переменных, не повлияв на значение минимума суммы.
+            Значит количество ненулевых окажется равным $d$, то есть в любом случае не превосходит $\min(n, d)$.
+        \end{prf}
+
+    \end{enumerate}
+
+\end{document}

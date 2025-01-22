@@ -1,0 +1,3 @@
+# CString library
+
+***By NThemeDEV***
