@@ -17,21 +17,21 @@
 
 \begin{enumerate}
     \item \textbf{Precision:}
-    \[
-    \text{Precision} = \frac{TP}{TP + FP}.
-    \]
-    Precision показывает долю истинно положительных объектов среди всех объектов, классифицированных как положительные.
+          \[
+              \text{Precision} = \frac{TP}{TP + FP}.
+          \]
+          Precision показывает долю истинно положительных объектов среди всех объектов, классифицированных как положительные.
 
     \item \textbf{Recall:}
-    \[
-    \text{Recall} = \frac{TP}{TP + FN}.
-    \]
-    Recall показывает долю истинно положительных объектов среди всех реально положительных объектов.
+          \[
+              \text{Recall} = \frac{TP}{TP + FN}.
+          \]
+          Recall показывает долю истинно положительных объектов среди всех реально положительных объектов.
 \end{enumerate}
 
 \begin{figure}[ht!]
-	\centering
-	\includegraphics[width=0.65\linewidth]{chapters/model_selection/images/Precisionrecall.png}
+    \centering
+    \includegraphics[width=0.65\linewidth]{chapters/model_selection/images/Precisionrecall.png}
 \end{figure}
 
 \subsection*{Интуитивное объяснение}
@@ -49,14 +49,14 @@
 
 \begin{itemize}
     \item \textbf{Precision:}
-    \[
-    \text{Precision} = \frac{TP}{TP + FP} = \frac{30}{30 + 20} = 0.6.
-    \]
+          \[
+              \text{Precision} = \frac{TP}{TP + FP} = \frac{30}{30 + 20} = 0.6.
+          \]
 
     \item \textbf{Recall:}
-    \[
-    \text{Recall} = \frac{TP}{TP + FN} = \frac{30}{30 + 10} = 0.75.
-    \]
+          \[
+              \text{Recall} = \frac{TP}{TP + FN} = \frac{30}{30 + 10} = 0.75.
+          \]
 \end{itemize}
 
 \subsection*{Баланс между precision и recall}
@@ -65,7 +65,7 @@
 
 \begin{itemize}
     \item Детекция спам-рассылок. В этом случае мы чаще всего не хотим пометить важные письма, как спам. Поэтому нужно снизить False Positive - важнее precision.
-    \item Первичного выявление заболевания. Мы не хотим пропустить пациентов, которые на самом деле больны, только потому что модель сказала обратное. Поэтому важно снизить False Negative - в этом случае важнее recall. 
+    \item Первичного выявление заболевания. Мы не хотим пропустить пациентов, которые на самом деле больны, только потому что модель сказала обратное. Поэтому важно снизить False Negative - в этом случае важнее recall.
 \end{itemize}
 
 \subsection*{Интуитивное объяснение}
@@ -73,8 +73,8 @@
 Если при получении положительного ответа от модели мы предпринимаем какое-либо действие, то precision важнее, когда действие обходится дорого, а recall важнее, когда бездействие обходится дорого. В примерах выше: помещение важного письма в папку "спам" (действие) может привести к финансовым потерям, а пропуск реального спама во "входящие" (бездействие) лишь заставит человека сделать это вручную. С другой стороны, при ложноположительном диагнозе человек пройдёт дополнительные анализы (действие), а ложноотрицательный может стоить ему жизни (бездействие).
 
 \begin{figure}[ht!]
-	\centering
-	\includegraphics[width=0.65\linewidth]{chapters/model_selection/images/Precisionrecallcurve.png}
+    \centering
+    \includegraphics[width=0.65\linewidth]{chapters/model_selection/images/Precisionrecallcurve.png}
 \end{figure}
 
 \bigskip
@@ -86,11 +86,11 @@
 
 Часто для оценки общего качества модели используется метрика $F$-мера, которая является гармоническим средним между precision и recall с параметром $\beta$:
 \[
-F_{\beta} = (1 + \beta^2) \cdot \frac{\text{Precision} \cdot \text{Recall}}{\beta^2 \cdot \text{Precision} + \text{Recall}}.
+    F_{\beta} = (1 + \beta^2) \cdot \frac{\text{Precision} \cdot \text{Recall}}{\beta^2 \cdot \text{Precision} + \text{Recall}}.
 \]
 Из формулы понятно, что $\beta$ определяет, насколько recall важнее по сравнению с precision. Наиболее часто используется $F_1$-мера:
 \[
-F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}.
+    F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}.
 \]
 
 \subsection*{Задачи}
@@ -126,17 +126,17 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 Найдём precision и recall.
 \begin{itemize}
     \item
-    \[
-    \text{$precision$} = \frac{400}{400 + 200} = \frac{400}{600} \approx 0.667.
-    \]
+          \[
+              \text{$precision$} = \frac{400}{400 + 200} = \frac{400}{600} \approx 0.667.
+          \]
     \item
-    \[
-    \text{$recall$} = \frac{400}{400 + 100} = \frac{400}{500} = 0.8.
-    \]
+          \[
+              \text{$recall$} = \frac{400}{400 + 100} = \frac{400}{500} = 0.8.
+          \]
     \item
-    \[
-    \text{$F_1$-score} = 2\frac{precision\cdot recall}{precision + recall} = 2\frac{0.667\cdot 0.8}{0.667 + 0.8} \approx 0.722
-    \]
+          \[
+              \text{$F_1$-score} = 2\frac{precision\cdot recall}{precision + recall} = 2\frac{0.667\cdot 0.8}{0.667 + 0.8} \approx 0.722
+          \]
 
 \end{itemize}
 
@@ -144,21 +144,21 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 
 \begin{itemize}
     \item
-    \[
-    \text{$precision$} = \frac{400 + 50\alpha}{650}.
-    \]
+          \[
+              \text{$precision$} = \frac{400 + 50\alpha}{650}.
+          \]
     \item
-    \[
-    \text{$recall$} = \frac{400 + 50\alpha}{500}.
-    \]
+          \[
+              \text{$recall$} = \frac{400 + 50\alpha}{500}.
+          \]
     \item
-    \[
-    \text{$F_1$-score} = \frac{16 + 2\alpha}{23} \approx 0.696 + 0.087\alpha
-    \]
+          \[
+              \text{$F_1$-score} = \frac{16 + 2\alpha}{23} \approx 0.696 + 0.087\alpha
+          \]
     \item
-    \[
-    \text{$\Delta F_1$-score} \approx 0.696 + 0.087\alpha - 0.722 = -0.026 + 0.087\alpha
-    \]
+          \[
+              \text{$\Delta F_1$-score} \approx 0.696 + 0.087\alpha - 0.722 = -0.026 + 0.087\alpha
+          \]
 \end{itemize}
 
 Таким образом, $F_1$-мера уменьшится на -0.026 если все новые помеченные транзакции на самом деле легитимные, увеличится на 0.061, если они все на самом деле мошеннические. Заметим, что $F_1$-мера останется неизменной, если $\alpha = \frac{1}{3}$, то есть изначальная доля ложноположительных среди всех помеченных.
@@ -215,12 +215,12 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 Вы обучаете модель с одним гиперпараметром $\lambda$, который принимает значения из множества $\{0.1, 0.5, 1.0, 5.0\}$. Для оценки качества модели используется 4-fold cross-validation, и в каждой итерации вычисляется метрика $Accuracy$. Результаты по folds для каждого значения $\lambda$ следующие:
 
 \begin{tabular}{|c|c|c|c|c|}
-\hline
-$\lambda$ & Fold 1 & Fold 2 & Fold 3 & Fold 4 \\ \hline
-0.1       & 0.85   & 0.83   & 0.80   & 0.82   \\ \hline
-0.5       & 0.88   & 0.87   & 0.85   & 0.86   \\ \hline
-1.0       & 0.90   & 0.91   & 0.89   & 0.90   \\ \hline
-5.0       & 0.78   & 0.75   & 0.80   & 0.76   \\ \hline
+    \hline
+    $\lambda$ & Fold 1 & Fold 2 & Fold 3 & Fold 4 \\ \hline
+    0.1       & 0.85   & 0.83   & 0.80   & 0.82   \\ \hline
+    0.5       & 0.88   & 0.87   & 0.85   & 0.86   \\ \hline
+    1.0       & 0.90   & 0.91   & 0.89   & 0.90   \\ \hline
+    5.0       & 0.78   & 0.75   & 0.80   & 0.76   \\ \hline
 \end{tabular}
 
 Какое значение $\lambda$ следует выбрать для модели? Найдите среднее значение $Accuracy$ для каждого $\lambda$ и выберите оптимальный гиперпараметр.
@@ -229,37 +229,37 @@ $\lambda$ & Fold 1 & Fold 2 & Fold 3 & Fold 4 \\ \hline
 Для каждого значения $\lambda$ найдём среднее значение метрики $Accuracy$:
 \begin{itemize}
     \item Для $\lambda = 0.1$:
-    \[
-    \text{Mean Accuracy} = \frac{0.85 + 0.83 + 0.80 + 0.82}{4} = \frac{3.3}{4} = 0.825.
-    \]
+          \[
+              \text{Mean Accuracy} = \frac{0.85 + 0.83 + 0.80 + 0.82}{4} = \frac{3.3}{4} = 0.825.
+          \]
     \item Для $\lambda = 0.5$:
-    \[
-    \text{Mean Accuracy} = \frac{0.88 + 0.87 + 0.85 + 0.86}{4} = \frac{3.46}{4} = 0.865.
-    \]
+          \[
+              \text{Mean Accuracy} = \frac{0.88 + 0.87 + 0.85 + 0.86}{4} = \frac{3.46}{4} = 0.865.
+          \]
     \item Для $\lambda = 1.0$:
-    \[
-    \text{Mean Accuracy} = \frac{0.90 + 0.91 + 0.89 + 0.90}{4} = \frac{3.6}{4} = 0.90.
-    \]
+          \[
+              \text{Mean Accuracy} = \frac{0.90 + 0.91 + 0.89 + 0.90}{4} = \frac{3.6}{4} = 0.90.
+          \]
     \item Для $\lambda = 5.0$:
-    \[
-    \text{Mean Accuracy} = \frac{0.78 + 0.75 + 0.80 + 0.76}{4} = \frac{3.09}{4} = 0.7725.
-    \]
+          \[
+              \text{Mean Accuracy} = \frac{0.78 + 0.75 + 0.80 + 0.76}{4} = \frac{3.09}{4} = 0.7725.
+          \]
 \end{itemize}
 
 Оптимальным значением $\lambda$ является $1.0$, так как оно даёт максимальное среднее значение $Accuracy$:
 \[
-\lambda_{\text{opt}} = 1.0, \quad \text{Mean Accuracy} = 0.90.
+    \lambda_{\text{opt}} = 1.0, \quad \text{Mean Accuracy} = 0.90.
 \]
 
 \section*{Аналитические внутренние критерии}
 
 При выборе модели машинного обучения
 \[
-f : \mathbb{X} \to \mathbb{Y},
+    f : \mathbb{X} \to \mathbb{Y},
 \]
 модель выбирается согласно некоторого критерия $L$ (функции ошибки, минус логарифм правдоподобия и т.д.). Обычно в качестве функции $L$ рассматривается некоторая функция ошибки модели $f$ на выборке $\mathcal{D}$:
 \[
-f = \underset{f \in \mathfrak{F}}{\arg\min} \ L(f, \mathcal{D}).
+    f = \underset{f \in \mathfrak{F}}{\arg\min} \ L(f, \mathcal{D}).
 \]
 
 В зависимости от вида функции $L$ разделяют два типа критериев:
@@ -279,26 +279,26 @@ f = \underset{f \in \mathfrak{F}}{\arg\min} \ L(f, \mathcal{D}).
 \subsection*{Внутренние и внешние критерии}
 \textbf{Внутренний критерий качества} используется для оценки модели на той же выборке, на которой она обучалась. Примером внутреннего критерия является:
 \[
-Q_{\text{внутренний}}(w, \mathcal{D}) = \frac{1}{|\mathcal{D}|} \sum_{i=1}^{|\mathcal{D}|} L(f(x_i, w), y_i),
+    Q_{\text{внутренний}}(w, \mathcal{D}) = \frac{1}{|\mathcal{D}|} \sum_{i=1}^{|\mathcal{D}|} L(f(x_i, w), y_i),
 \]
-где $L$ --- функция ошибки, $w$ --- параметры модели, $(x_i, y_i)$ --- объекты выборки $\mathcal{D}$. 
+где $L$ --- функция ошибки, $w$ --- параметры модели, $(x_i, y_i)$ --- объекты выборки $\mathcal{D}$.
 
 \textbf{Внешний критерий качества} оценивает качество модели на независимой выборке $\mathcal{D}'$, не использовавшейся при обучении. Примером внешнего критерия является:
 \[
-Q_{\text{внешний}}(w, \mathcal{D}') = \frac{1}{|\mathcal{D}'|} \sum_{i=1}^{|\mathcal{D}'|} L(f(x_i, w), y_i).
+    Q_{\text{внешний}}(w, \mathcal{D}') = \frac{1}{|\mathcal{D}'|} \sum_{i=1}^{|\mathcal{D}'|} L(f(x_i, w), y_i).
 \]
 
 \subsection*{Регуляризация и внутренние критерии}
 Регуляризованный внутренний критерий используется для выбора оптимальной модели с учётом её сложности:
 \[
-Q_{\text{рег}}(w, \mathcal{D}) = Q(w, \mathcal{D}) + \tau R(w),
+    Q_{\text{рег}}(w, \mathcal{D}) = Q(w, \mathcal{D}) + \tau R(w),
 \]
 где $R(w)$ --- регуляризатор, штрафующий за сложность модели, а $\tau$ --- коэффициент регуляризации.
 
 \subsection*{VC-оценка}
 Для оценки обобщающей способности модели используется VC-оценка, основанная на VC-размерности модели $h$:
 \[
-VC(w, \mathcal{D}) = Q_{\text{внутренний}}(w, \mathcal{D}) + \sqrt{\frac{h}{|\mathcal{D}|} \ln \frac{2e|\mathcal{D}|}{h}}.
+    VC(w, \mathcal{D}) = Q_{\text{внутренний}}(w, \mathcal{D}) + \sqrt{\frac{h}{|\mathcal{D}|} \ln \frac{2e|\mathcal{D}|}{h}}.
 \]
 
 \subsection*{Сложность модели и переобучение}
@@ -310,7 +310,7 @@ VC(w, \mathcal{D}) = Q_{\text{внутренний}}(w, \mathcal{D}) + \sqrt{\fr
 
 \subsection*{Задача 1: Влияние сложности модели на внутренний критерий}
 
-Положим, что внутренний критерий модели монотонно уменьшается с увеличением числа признаков $n$, тогда как внешний критерий имеет минимум при $n = 5$. На выборке из $\ell = 150$ объектов модель с 3 признаками имеет $Q_{\text{внутренний}} = 0.08$, а модель с 6 признаками имеет $Q_{\text{внутренний}} = 0.05$. 
+Положим, что внутренний критерий модели монотонно уменьшается с увеличением числа признаков $n$, тогда как внешний критерий имеет минимум при $n = 5$. На выборке из $\ell = 150$ объектов модель с 3 признаками имеет $Q_{\text{внутренний}} = 0.08$, а модель с 6 признаками имеет $Q_{\text{внутренний}} = 0.05$.
 
 \begin{enumerate}
     \item Почему использование внутреннего критерия для выбора $n$ может привести к ошибке?
@@ -329,7 +329,7 @@ VC(w, \mathcal{D}) = Q_{\text{внутренний}}(w, \mathcal{D}) + \sqrt{\fr
 
 Пусть для линейной классификации на выборке из $\ell = 200$ объектов используется модель с VC-размерностью $h = 10$. Обучающая ошибка модели равна $Q_{\text{внутренний}}(w, X^\ell) = 0.05$. Используя упрощённую формулу VC-оценки:
 \[
-VC(w, X^\ell) = Q_{\text{внутренний}}(w, X^\ell) + \sqrt{\frac{h}{\ell} \ln \frac{2e\ell}{h}},
+    VC(w, X^\ell) = Q_{\text{внутренний}}(w, X^\ell) + \sqrt{\frac{h}{\ell} \ln \frac{2e\ell}{h}},
 \]
 рассчитайте VC-критерий.
 
@@ -337,25 +337,25 @@ VC(w, X^\ell) = Q_{\text{внутренний}}(w, X^\ell) + \sqrt{\frac{h}{\ell
 
 Подставляем значения:
 \[
-VC(w, X^\ell) = 0.05 + \sqrt{\frac{10}{200} \ln \frac{2e \cdot 200}{10}}.
+    VC(w, X^\ell) = 0.05 + \sqrt{\frac{10}{200} \ln \frac{2e \cdot 200}{10}}.
 \]
 
 Вычислим:
 \[
-\frac{10}{200} = 0.05, \quad \ln \frac{2e \cdot 200}{10} = \ln 40e \approx \ln 40 + 1 \approx 3.69.
+    \frac{10}{200} = 0.05, \quad \ln \frac{2e \cdot 200}{10} = \ln 40e \approx \ln 40 + 1 \approx 3.69.
 \]
 \[
-VC(w, X^\ell) = 0.05 + \sqrt{0.05 \cdot 3.69} \approx 0.05 + \sqrt{0.1845} \approx 0.05 + 0.43 = 0.48.
+    VC(w, X^\ell) = 0.05 + \sqrt{0.05 \cdot 3.69} \approx 0.05 + \sqrt{0.1845} \approx 0.05 + 0.43 = 0.48.
 \]
 
 
 \subsection*{Задача 3: Оценка с использованием аналитического внутреннего критерия}
 
-У вас есть модель линейной регрессии, обученная на выборке размером $\ell = 100$. Функционал качества модели $Q(w, X^\ell)$ на обучающей выборке составляет $0.02$, а регуляризатор $R(w)$ для модели рассчитывается как 
+У вас есть модель линейной регрессии, обученная на выборке размером $\ell = 100$. Функционал качества модели $Q(w, X^\ell)$ на обучающей выборке составляет $0.02$, а регуляризатор $R(w)$ для модели рассчитывается как
 \[
-R(w) = \tau \|w\|^2,
+    R(w) = \tau \|w\|^2,
 \]
-где $\|w\|^2 = 1.5$, а $\tau = 0.1$. 
+где $\|w\|^2 = 1.5$, а $\tau = 0.1$.
 
 \begin{enumerate}
     \item Вычислите регуляризованный критерий качества модели $Q_{\text{рег}}(w, X^\ell)$.
@@ -366,9 +366,9 @@ R(w) = \tau \|w\|^2,
 
 \begin{enumerate}
     \item
-    \[
-    Q_{\text{рег}}(w, X^\ell) = Q(w, X^\ell) + \tau \|w\|^2 = 0.02 + 0.1 \cdot 1.5 = 0.17.
-    \]
+          \[
+              Q_{\text{рег}}(w, X^\ell) = Q(w, X^\ell) + \tau \|w\|^2 = 0.02 + 0.1 \cdot 1.5 = 0.17.
+          \]
     \item Увеличение $\tau$ повышает штраф за сложность модели, что приводит к предпочтению более простых моделей. При уменьшении $\tau$ модель становится менее регуляризованной, что повышает риск переобучения.
 \end{enumerate}
 
@@ -395,7 +395,7 @@ R(w) = \tau \|w\|^2,
 \subsubsection{Задача 1: Обоснованность для модели линейной регрессии}
 Пусть имеется модель линейной регрессии с нормальным шумом
 \begin{equation*}
- \mathbf{y} = \mathbf{X}\mathbf{w} + \boldsymbol{\varepsilon}, \quad \boldsymbol{\varepsilon} \sim \mathcal{N}(0, \sigma^2 \mathbf{I}),
+    \mathbf{y} = \mathbf{X}\mathbf{w} + \boldsymbol{\varepsilon}, \quad \boldsymbol{\varepsilon} \sim \mathcal{N}(0, \sigma^2 \mathbf{I}),
 \end{equation*}
 где $\sigma^2$ --- известно, и априорным распределением на $\mathbf{w}$ $p(\mathbf{w}) = \mathcal{N}(\mathbf{w} \mid \mathbf{m}, \alpha^2 \mathbf{I}))$, где $\mathbf{m}$ и $\alpha$ ---
 неизвестные гиперпараметры.
@@ -407,8 +407,8 @@ R(w) = \tau \|w\|^2,
 Функция правдоподобия для нашей модели линейной регрессии с нормальными ошибками записывается как:
 
 \begin{align*}
- p(\mathbf{y} \mid \mathbf{X}, \mathbf{w}, \sigma^2) &= \mathcal{N}(\mathbf{y} \mid \mathbf{X}\mathbf{w}, \sigma^2 \mathbf{I}) \\
- &\propto \exp\left(-\frac{1}{2\sigma^2}(\mathbf{y} - \mathbf{X}\mathbf{w})^\top(\mathbf{y} - \mathbf{X}\mathbf{w})\right)
+    p(\mathbf{y} \mid \mathbf{X}, \mathbf{w}, \sigma^2) & = \mathcal{N}(\mathbf{y} \mid \mathbf{X}\mathbf{w}, \sigma^2 \mathbf{I})                                                 \\
+                                                        & \propto \exp\left(-\frac{1}{2\sigma^2}(\mathbf{y} - \mathbf{X}\mathbf{w})^\top(\mathbf{y} - \mathbf{X}\mathbf{w})\right)
 \end{align*}
 
 где $N$ — число наблюдений, а $\mathbf{I}$ — единичная матрица размера $N \times N$.
@@ -416,8 +416,8 @@ R(w) = \tau \|w\|^2,
 Априорное распределение для $\mathbf{w}$:
 
 \begin{align*}
- p(\mathbf{w} \mid \mathbf{m}, \alpha^2) &= \mathcal{N}(\mathbf{w} \mid \mathbf{m}, \alpha^2 \mathbf{I}) \\
- &\propto \exp\left(-\frac{1}{2\alpha^2}(\mathbf{w} - \mathbf{m})^\top(\mathbf{w} - \mathbf{m})\right)
+    p(\mathbf{w} \mid \mathbf{m}, \alpha^2) & = \mathcal{N}(\mathbf{w} \mid \mathbf{m}, \alpha^2 \mathbf{I})                                       \\
+                                            & \propto \exp\left(-\frac{1}{2\alpha^2}(\mathbf{w} - \mathbf{m})^\top(\mathbf{w} - \mathbf{m})\right)
 \end{align*}
 
 где $d$ — размерность вектора $\mathbf{w}$.
@@ -425,33 +425,33 @@ R(w) = \tau \|w\|^2,
 Маргинальная вероятность (обоснованность) находится путём интегрирования произведения правдоподобия и априорного распределения по $\mathbf{w}$:
 
 \begin{align*}
- p(\mathbf{y} \mid \mathbf{X}, \mathbf{m}, \alpha) &= \int p(\mathbf{y} \mid \mathbf{X}, \mathbf{w}, \sigma^2) p(\mathbf{w} \mid \mathbf{m}, \alpha^2) \, d\mathbf{w} \propto \\
- &\propto \int \exp\left(-\frac{1}{2\sigma^2}(\mathbf{y} - \mathbf{X}\mathbf{w})^\top(\mathbf{y} - \mathbf{X}\mathbf{w}) - \frac{1}{2\alpha^2}(\mathbf{w} - \mathbf{m})^\top(\mathbf{w} - \mathbf{m})\right) \, d\mathbf{w}.
+    p(\mathbf{y} \mid \mathbf{X}, \mathbf{m}, \alpha) & = \int p(\mathbf{y} \mid \mathbf{X}, \mathbf{w}, \sigma^2) p(\mathbf{w} \mid \mathbf{m}, \alpha^2) \, d\mathbf{w} \propto                                                                                                  \\
+                                                      & \propto \int \exp\left(-\frac{1}{2\sigma^2}(\mathbf{y} - \mathbf{X}\mathbf{w})^\top(\mathbf{y} - \mathbf{X}\mathbf{w}) - \frac{1}{2\alpha^2}(\mathbf{w} - \mathbf{m})^\top(\mathbf{w} - \mathbf{m})\right) \, d\mathbf{w}.
 \end{align*}
 
 Приведём выражение внутри экспоненты к квадратичной форме:
 
 \begin{align*}
- &-\frac{1}{2\sigma^2}(\mathbf{y} - \mathbf{X}\mathbf{w})^\top(\mathbf{y} - \mathbf{X}\mathbf{w}) - \frac{1}{2\alpha^2}(\mathbf{w} - \mathbf{m})^\top(\mathbf{w} - \mathbf{m})= \\
- &= -\frac{1}{2}(\mathbf{w} - \mathbf{b})^\top A^{-1} (\mathbf{w} - \mathbf{b}) + \frac{1}{2} b^\top A^{-1} b + \text{const},
+     & -\frac{1}{2\sigma^2}(\mathbf{y} - \mathbf{X}\mathbf{w})^\top(\mathbf{y} - \mathbf{X}\mathbf{w}) - \frac{1}{2\alpha^2}(\mathbf{w} - \mathbf{m})^\top(\mathbf{w} - \mathbf{m})= \\
+     & = -\frac{1}{2}(\mathbf{w} - \mathbf{b})^\top A^{-1} (\mathbf{w} - \mathbf{b}) + \frac{1}{2} b^\top A^{-1} b + \text{const},
 \end{align*}
 
 где $\mathbf{A}$ и $\mathbf{b}$ равны следующим выражениям:
 \begin{align*}
- A &= \left(\frac{\mathbf{X}^\top \mathbf{X}}{\sigma^2} + \frac{\mathbf{I}}{\alpha^2}\right)^{-1},\\
- \mathbf{b} &= \frac{1}{\sigma^2} \mathbf{X}^\top \mathbf{y} + \frac{1}{\alpha^2} \mathbf{m}.
+    A          & = \left(\frac{\mathbf{X}^\top \mathbf{X}}{\sigma^2} + \frac{\mathbf{I}}{\alpha^2}\right)^{-1}, \\
+    \mathbf{b} & = \frac{1}{\sigma^2} \mathbf{X}^\top \mathbf{y} + \frac{1}{\alpha^2} \mathbf{m}.
 \end{align*}
 
 Подставим в интеграл полученное выражение:
 \begin{align*}
- p(\mathbf{y} \mid \mathbf{X}, \mathbf{m}, \alpha) &\propto \int \exp\left(-\frac{1}{2}(\mathbf{w} - \mathbf{b})^\top \mathbf{A}^{-1} (\mathbf{w} - \mathbf{b}) + \frac{1}{2} \mathbf{b}^\top \mathbf{A}^{-1} \mathbf{b} \right) \, d\mathbf{w}.
+    p(\mathbf{y} \mid \mathbf{X}, \mathbf{m}, \alpha) & \propto \int \exp\left(-\frac{1}{2}(\mathbf{w} - \mathbf{b})^\top \mathbf{A}^{-1} (\mathbf{w} - \mathbf{b}) + \frac{1}{2} \mathbf{b}^\top \mathbf{A}^{-1} \mathbf{b} \right) \, d\mathbf{w}.
 \end{align*}
 Этот интеграл пропорционален $\propto\exp\left(\dfrac{1}{2} \mathbf{b}^\top \mathbf{A}^{-1} \mathbf{b}\right) \sqrt{\det \mathbf{A}}$, поскольку интеграл экспоненты от полного квадрата пропорционален $\sqrt{\det \mathbf{A}}$.
 
 \textbf{Ответ:} $p(\mathbf{y} \mid \mathbf{X}, \mathbf{m}, \alpha) \propto\exp\left(\dfrac{1}{2} \mathbf{b}^\top \mathbf{A}^{-1} \mathbf{b}\right) \sqrt{\det \mathbf{A}}$, где
 \begin{align*}
- \mathbf{A} &= \left(\frac{\mathbf{X}^\top \mathbf{X}}{\sigma^2} + \frac{\mathbf{I}}{\alpha^2}\right)^{-1},\\
- \mathbf{b} &= \frac{1}{\sigma^2} \mathbf{X}^\top \mathbf{y} + \frac{1}{\alpha^2} \mathbf{m}.
+    \mathbf{A} & = \left(\frac{\mathbf{X}^\top \mathbf{X}}{\sigma^2} + \frac{\mathbf{I}}{\alpha^2}\right)^{-1}, \\
+    \mathbf{b} & = \frac{1}{\sigma^2} \mathbf{X}^\top \mathbf{y} + \frac{1}{\alpha^2} \mathbf{m}.
 \end{align*}
 
 \subsubsection{Задача 2: Применение обосонованности при выборе модели}
@@ -468,8 +468,8 @@ R(w) = \tau \|w\|^2,
 
 Их можно выделить несколько:
 \begin{itemize}
- \item Сложность вычисления интеграла по всем возможным параметрам $\theta$. Если представить, что мы хотим применить наш подход, например, в глубоких нейронных сетях на миллионы параметров, то взять интеграл из определения обоснованности попросту невозможно. Более того, не всегда он будет браться аналитически, и тогда придется либо нижние оценки, либо считать его сэмплированием, из-за чего пострадает качество и что тоже достаточно сложно или дорого вычислительно.
- \item Мы не всегда знаем, из каких априорных распределений берутся параметры модели. В простых задачах, по типу линейной или логистической регресии, мы можем наложить нормальное априорное распределение и получить неплохую модель. Но например в тех же глубоких нейронных сетях или более сложных моделях, может быть такое, что мы даже предположить не можем, какое априорное распределение взять.
+    \item Сложность вычисления интеграла по всем возможным параметрам $\theta$. Если представить, что мы хотим применить наш подход, например, в глубоких нейронных сетях на миллионы параметров, то взять интеграл из определения обоснованности попросту невозможно. Более того, не всегда он будет браться аналитически, и тогда придется либо нижние оценки, либо считать его сэмплированием, из-за чего пострадает качество и что тоже достаточно сложно или дорого вычислительно.
+    \item Мы не всегда знаем, из каких априорных распределений берутся параметры модели. В простых задачах, по типу линейной или логистической регресии, мы можем наложить нормальное априорное распределение и получить неплохую модель. Но например в тех же глубоких нейронных сетях или более сложных моделях, может быть такое, что мы даже предположить не можем, какое априорное распределение взять.
 \end{itemize}
 
 
@@ -479,7 +479,7 @@ R(w) = \tau \|w\|^2,
 
 \subsection*{Критерии регуляризации}
 
-\par \textbf{Регуляризатор} - аддитивная добавка к внутреннему критерию, обычно штраф за сложность (complexity penalty) модели $A$. 
+\par \textbf{Регуляризатор} - аддитивная добавка к внутреннему критерию, обычно штраф за сложность (complexity penalty) модели $A$.
 
 \begin{align*}
     Q_{per} (\mu, X^l) = Q_{\mu}(X^l) + \text{штраф}(A)
@@ -496,90 +496,90 @@ R(w) = \tau \|w\|^2,
 
 \begin{enumerate}
     \item $L_2$-регуляризация (RIDGE)
-        \begin{align*}
-            \text{штраф}(A) =  \tau \|w\|_2^2 = \tau \sum\limits_{i = 1}^n w_i^2
-        \end{align*}
-        Может приводить к обнулению некоторых, несущественных признаков, что делает модель более разреженной
+          \begin{align*}
+              \text{штраф}(A) =  \tau \|w\|_2^2 = \tau \sum\limits_{i = 1}^n w_i^2
+          \end{align*}
+          Может приводить к обнулению некоторых, несущественных признаков, что делает модель более разреженной
     \item $L_1$-регуляризация (LASSO)
-        \begin{align*}
-            \text{штраф}(A) = \tau \|w\|_1 = \tau \sum\limits_{i = 1}^n |w_i|
-        \end{align*}
+          \begin{align*}
+              \text{штраф}(A) = \tau \|w\|_1 = \tau \sum\limits_{i = 1}^n |w_i|
+          \end{align*}
     \item $L_0$-регуляризация (AIC, BIC):
-        \begin{align*}
-            \text{штраф}(A) = \tau\|w\|_0 = \tau\sum\limits_{i = 1}^n [w_i \neq 0]
-        \end{align*}
-        т.е. штрафует за количество используемых параметров
+          \begin{align*}
+              \text{штраф}(A) = \tau\|w\|_0 = \tau\sum\limits_{i = 1}^n [w_i \neq 0]
+          \end{align*}
+          т.е. штрафует за количество используемых параметров
 \end{enumerate}
 
 \subsection*{Разновидности $L_0$ регуляризации}
 
 \begin{enumerate}
-    \item Информационный критерий Акаике 
-        \begin{align*}
-            \text{AIC}(\mu, X^l) = Q_{\mu}(X^l) + \frac{2\hat{\sigma}^2}{l}|J|
-        \end{align*}
-        где $J$ - модмножество используемых параметров, а $\hat{\sigma}^2$ - оценка дисперсии ошибки $\mathbb{D}[y_i - a(x_i)]$ 
+    \item Информационный критерий Акаике
+          \begin{align*}
+              \text{AIC}(\mu, X^l) = Q_{\mu}(X^l) + \frac{2\hat{\sigma}^2}{l}|J|
+          \end{align*}
+          где $J$ - модмножество используемых параметров, а $\hat{\sigma}^2$ - оценка дисперсии ошибки $\mathbb{D}[y_i - a(x_i)]$
     \item Байесовский информационный критерий
-        \begin{align*}
-            \text{BIC}(\mu, X^l) = \frac{l}{\hat{\sigma}^2}\left(Q_{\mu}(X^l) + \frac{\hat{\sigma}^2\ln{l}}{l}|J|\right)
-        \end{align*}
+          \begin{align*}
+              \text{BIC}(\mu, X^l) = \frac{l}{\hat{\sigma}^2}\left(Q_{\mu}(X^l) + \frac{\hat{\sigma}^2\ln{l}}{l}|J|\right)
+          \end{align*}
     \item Оценка Вапника-Червоненкиса (VC-bound)
-        \begin{align*}
-            VC(\mu, X^l) = Q_{\mu}(X^l) + \sqrt{\frac{h}{l}\ln{\frac{2el}{h}} + \frac{1}{l}\ln{\frac{9}{4\eta}}}
-        \end{align*}
-        где $h$ - VC-размерность, которая для линейных моделей равна $|J|$, $\eta$ - уровень значимости, обычно равный $0.05$
+          \begin{align*}
+              VC(\mu, X^l) = Q_{\mu}(X^l) + \sqrt{\frac{h}{l}\ln{\frac{2el}{h}} + \frac{1}{l}\ln{\frac{9}{4\eta}}}
+          \end{align*}
+          где $h$ - VC-размерность, которая для линейных моделей равна $|J|$, $\eta$ - уровень значимости, обычно равный $0.05$
 \end{enumerate}
 
 \subsection*{Задачи}
 
 \begin{enumerate}
     \item \textbf{Задача 1}
-    
-        Рассмотрим задачу линейной регрессии, вектор весов $w= [2, -1, 0, 3]$. Тренировочные данные:
-        \begin{align*}
-            X = \begin{bmatrix}
-            1 & 2 & 3 & 4 \\
-            2 & 0 & 1 & 3 \\
-            3 & 1 & 0 & 2 
-            \end{bmatrix} 
-        \end{align*}
-        \begin{align*}
-            y = [10,8,7]
-        \end{align*}
-        Найдите:
-        \begin{itemize}
-        \item L2, L1, L0 штрафы
-        \item BIC и AIC
-        \end{itemize}
-        $\tau$ везде принять за 1
-        
-        \textbf{Решение:} Не выписывая все выкладки, выпишем ответы:
-        \begin{itemize}
-            \item $L1 = \|w\|_1 = 6$
-            \item $L2 = \|w\|_2^2 = 14$
-            \item $L0 = \|w\|_0 = 3$
-        \end{itemize}
-        Для поиска AIC и BIC поднадобится дисперсия
-        \begin{align*}
-            \hat{\sigma}^2 = 15.0
-        \end{align*}
-        Тогда
-        \begin{itemize}
-            \item AIC = 14.12
-            \item BIC = 11.42
-        \end{itemize}
+
+          Рассмотрим задачу линейной регрессии, вектор весов $w= [2, -1, 0, 3]$. Тренировочные данные:
+          \begin{align*}
+              X = \begin{bmatrix}
+                      1 & 2 & 3 & 4 \\
+                      2 & 0 & 1 & 3 \\
+                      3 & 1 & 0 & 2
+                  \end{bmatrix}
+          \end{align*}
+          \begin{align*}
+              y = [10,8,7]
+          \end{align*}
+          Найдите:
+          \begin{itemize}
+              \item L2, L1, L0 штрафы
+              \item BIC и AIC
+          \end{itemize}
+          $\tau$ везде принять за 1
+
+          \textbf{Решение:} Не выписывая все выкладки, выпишем ответы:
+          \begin{itemize}
+              \item $L1 = \|w\|_1 = 6$
+              \item $L2 = \|w\|_2^2 = 14$
+              \item $L0 = \|w\|_0 = 3$
+          \end{itemize}
+          Для поиска AIC и BIC поднадобится дисперсия
+          \begin{align*}
+              \hat{\sigma}^2 = 15.0
+          \end{align*}
+          Тогда
+          \begin{itemize}
+              \item AIC = 14.12
+              \item BIC = 11.42
+          \end{itemize}
     \item \textbf{Задача 2}
 
-        Докажите, что увеличение объёма выборки $l$ снижает влияние VC-размерности на обобщающую ошибку, если уровень значимости $\eta$ остаётся неизменным. Какой у этого физический смысл?
+          Докажите, что увеличение объёма выборки $l$ снижает влияние VC-размерности на обобщающую ошибку, если уровень значимости $\eta$ остаётся неизменным. Какой у этого физический смысл?
 
-        \textbf{Решение: }
-            VC-bound можно переписать следующим образом
-            \begin{align*}
-                VC(\mu, X^l) = Q_{\mu}(X^l) + \sqrt{\frac{h\ln{l\frac{2e}{h}} + \ln{\frac{9}{4\eta}}}{l}}
-            \end{align*}
-            То есть $VC(\mu, X^l) \sim Q_{\mu}(X^l) + \sqrt{\frac{\ln{l}}{l}}$
-            Второ слагаемое стремится к нулю при $l \rightarrow \inf$. Это означает, что модель достаточно устойчива к переобучению при большой тренировочной выборке, поэтому внешний штраф не так уж и нужен и большую роль влияет внутренний критерий.
+          \textbf{Решение: }
+          VC-bound можно переписать следующим образом
+          \begin{align*}
+              VC(\mu, X^l) = Q_{\mu}(X^l) + \sqrt{\frac{h\ln{l\frac{2e}{h}} + \ln{\frac{9}{4\eta}}}{l}}
+          \end{align*}
+          То есть $VC(\mu, X^l) \sim Q_{\mu}(X^l) + \sqrt{\frac{\ln{l}}{l}}$
+          Второ слагаемое стремится к нулю при $l \rightarrow \inf$. Это означает, что модель достаточно устойчива к переобучению при большой тренировочной выборке, поэтому внешний штраф не так уж и нужен и большую роль влияет внутренний критерий.
     \item \textbf{Задача 3}
 
-        Объясните, почему L2-регуляризация не приводит к разреженности вектора параметров $w$, в отличие от L1-регуляризации.
+          Объясните, почему L2-регуляризация не приводит к разреженности вектора параметров $w$, в отличие от L1-регуляризации.
 \end{enumerate}

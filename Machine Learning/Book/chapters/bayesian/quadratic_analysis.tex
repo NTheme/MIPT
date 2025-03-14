@@ -54,27 +54,27 @@
 Ясно, что подбором штрафных коэффициентов можно добиться того, чтобы уравнение разделяющей поверхности имело вид \[(x-\mu_{y})^{T}\Sigma_{y}(x-\mu) = (x-\mu_{s})^{T}\Sigma_{s}(x-\mu_{s})\]
 
 Зададим y и s следующим образом: \[\begin{equation*}
-\mu_y = \begin{pmatrix}
-1\\
-0
-\end{pmatrix},
-\Sigma_y = \frac{1}{5}
-\begin{pmatrix}
-6 & -2\\
--2 & 9
-\end{pmatrix}
-\end{equation*}\]
+        \mu_y = \begin{pmatrix}
+            1 \\
+            0
+        \end{pmatrix},
+        \Sigma_y = \frac{1}{5}
+        \begin{pmatrix}
+            6  & -2 \\
+            -2 & 9
+        \end{pmatrix}
+    \end{equation*}\]
 \[\begin{equation*}
-\mu_s = \begin{pmatrix}
--1\\
-0
-\end{pmatrix},
-\Sigma_s = \frac{1}{5}
-\begin{pmatrix}
-6 & 2\\
-2 & 9
-\end{pmatrix}
-\end{equation*}\]
+        \mu_s = \begin{pmatrix}
+            -1 \\
+            0
+        \end{pmatrix},
+        \Sigma_s = \frac{1}{5}
+        \begin{pmatrix}
+            6 & 2 \\
+            2 & 9
+        \end{pmatrix}
+    \end{equation*}\]
 
 Тогда исходное уравнение сводится к уравнению \left(9x-9+2y\right)\left(x-1\right) + \left(2x-2+6y\right)y - \left(9x-2y+9\right)\left(x+1\right) - \left(-2x-2+6y\right)y = 0
 
@@ -88,8 +88,8 @@
 
 \textbf{Решение}
 
- Так как $\Sigma$ - ковариационная матрица, она симметричная и неотрицательно определённая, следовательно, существует базис, в котором она имеет диагональный вид: $\Sigma = diag (\lambda_1, ..., \lambda_n)$ ($\lambda_i \in \mathbb{R}, \lambda_i \geq 0$). Так как в любом базисе оператор, записываемый в старом базисе как $\tau I_n$ - просто домножение на $\tau$, то в новом базисе матрица оператора $\tau I_n$ останется прежней.
+Так как $\Sigma$ - ковариационная матрица, она симметричная и неотрицательно определённая, следовательно, существует базис, в котором она имеет диагональный вид: $\Sigma = diag (\lambda_1, ..., \lambda_n)$ ($\lambda_i \in \mathbb{R}, \lambda_i \geq 0$). Так как в любом базисе оператор, записываемый в старом базисе как $\tau I_n$ - просто домножение на $\tau$, то в новом базисе матрица оператора $\tau I_n$ останется прежней.
 
- Тогда $\det (\Sigma + \tau I_{n}) = \det(diag(\lambda_1 + \tau, ..., \lambda_n + \tau)) = \prod_{i = 1}^{n}(\lambda_i + \tau) \geq \tau^n$.
+Тогда $\det (\Sigma + \tau I_{n}) = \det(diag(\lambda_1 + \tau, ..., \lambda_n + \tau)) = \prod_{i = 1}^{n}(\lambda_i + \tau) \geq \tau^n$.
 
- Поэтому для выполнения условия задачи достаточно взять любое $\tau \geq \varepsilon^{\frac{1}{n}}$, то есть это всегда возможно, что и требовалось доказать.
+Поэтому для выполнения условия задачи достаточно взять любое $\tau \geq \varepsilon^{\frac{1}{n}}$, то есть это всегда возможно, что и требовалось доказать.
