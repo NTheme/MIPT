@@ -1,0 +1,393 @@
+\documentclass[a4paper,landscape]{article}
+\usepackage[margin=1cm]{geometry}
+\usepackage{tabularx,booktabs,ragged2e,xcolor}
+
+\definecolor{darkgreen}{RGB}{84,130,53}
+\definecolor{myorange}{RGB}{222,94,0}
+\definecolor{mypurple}{RGB}{102,51,153}
+
+\newcolumntype{C}{>{\Centering\arraybackslash}X}
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{table}[ht]
+    \textbf{Adjective + Transmission}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                        &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}       &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                    \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}} &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                            &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}   &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                             \\ \hline
+
+        \textbf{1.} \textbf{Low-latency transmission}
+                                                                                      & A transmission method characterized by minimal delay in data delivery.
+                                                                                      & \textbf{Low-latency transmission} of gradients between GPUs speeds up distributed Hessian approximation.
+                                                                                      & \begin{tabular}[t]{@{}l@{}}
+                                                                                            \textbf{1.} transmission n. – transfer  \\
+                                                                                            \textbf{2.} latency n. – delay          \\
+                                                                                            \textbf{3.} gradient n. – slope         \\
+                                                                                            \textbf{4.} GPU n. – graphics card      \\
+                                                                                            \textbf{5.} approximation n. – estimate \\
+                                                                                        \end{tabular}
+
+        \textbf{Simplified:} A way to transfer data with almost no waiting.           &
+
+        \textbf{Analogy:} Like an express lane that lets cars (data) pass quickly.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, in Hessian calculations it’s like having a fast track for updates so each step runs smoother.                                                                             \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Noun + Differentiate}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                        &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}       &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                 \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}} &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                            &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}   &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                          \\ \hline
+
+        \textbf{1.} \textbf{Differentiate function}
+                                                                                      & To find the derivatives of different mathematical functions to analyze their behavior.
+                                                                                      & To optimize model parameters, we \textbf{differentiate} the loss \textbf{function} to compute the gradient, guiding each update step.
+                                                                                      & \begin{tabular}[t]{@{}l@{}}
+                                                                                            \textbf{1.} differentiate v. – compute \\
+                                                                                            \textbf{2.} derivative n. – rate       \\
+                                                                                            \textbf{3.} function n. – mapping      \\
+                                                                                            \textbf{4.} gradient n. – slope        \\
+                                                                                            \textbf{5.} loss n. – error            \\
+                                                                                            \textbf{6.} parameter n. – variable    \\[4pt]
+                                                                                        \end{tabular}
+
+        \textbf{Simplified:} Finding how fast a mapping changes.                      &
+
+        \textbf{Analogy:} Like measuring how steep a hill is at a point to know how fast you can walk.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, when training a neural network, differentiating the loss is like measuring the hill’s slope so you know which direction to step to decrease error.                                                     \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Noun + Regularization}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                                     &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}                    &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                                                                                                   \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}}              &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                                      &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                                         &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}                &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                                                                                                            \\ \hline
+
+        \textbf{1.} \textbf{Regularization technique}
+                                                                                                   & A strategy used to prevent overfitting by adding a penalty for larger coefficients in the model.
+                                                                                                   & When estimating the Hessian spectrum, we apply $L2$ \textbf{regularization} \textbf{technique} to the loss function to penalize large weight contributions, enhancing stability in eigenvalue computation.
+                                                                                                   & \begin{tabular}[t]{@{}l@{}}
+                                                                                                         \textbf{1.} regularization n. – penalty \\
+                                                                                                         \textbf{2.} Hessian n. – curvature      \\
+                                                                                                         \textbf{3.} loss n. – error             \\
+                                                                                                         \textbf{4.} weight n. – parameter       \\
+                                                                                                         \textbf{5.} stability n. – robustness   \\
+                                                                                                     \end{tabular}
+
+        \textbf{Simplified:} A method that adds penalties to large weights to prevent overfitting. &
+
+        \textbf{Analogy:} Like adding guardrails on a winding road to keep cars (data) from veering off.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, regularization is like guardrails during training, preventing the model from oversteering into noise.                                                                                                                                                                                    \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Noun + Heuristic}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                           &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}          &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                          \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}}    &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                            &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                               &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}      &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                   \\ \hline
+
+        \textbf{1.} \textbf{Heuristic algorithm}
+                                                                                         & An algorithm designed to solve problems faster than classical methods, typically by using approximation and rules of thumb.
+                                                                                         & \textbf{The heuristic algorithm} efficiently navigated the search space to find an optimal solution in a shorter time.
+                                                                                         & \begin{tabular}[t]{@{}l@{}}
+                                                                                               \textbf{1.} heuristic n. – rule         \\
+                                                                                               \textbf{2.} algorithm n. – procedure    \\
+                                                                                               \textbf{3.} approximation n. – estimate \\
+                                                                                               \textbf{4.} search n. – exploration     \\
+                                                                                               \textbf{5.} solution n. – answer        \\
+                                                                                               \textbf{6.} classical adj. – standard   \\
+                                                                                           \end{tabular}
+
+        \textbf{Simplified:} A rule-based method that quickly finds good-enough answers. &
+
+        \textbf{Analogy:} Like a navigator that picks a likely fast route without checking every road.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, in large-scale optimization, the heuristic algorithm acts like a scout, exploring promising regions first to speed up convergence.                                                              \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Noun + Covariance}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                        &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}       &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                                  \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}} &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                            &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}   &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                                           \\ \hline
+
+        \textbf{1.} \textbf{Covariance matrix}
+                                                                                      & A square matrix that contains the covariances between pairs of variables, used in statistics to understand the relationships among multiple variables.
+                                                                                      & \textbf{The covariance matrix} of Monte Carlo gradient samples uncovers the dominant active subspace in loss landscape analysis.
+                                                                                      & \begin{tabular}[t]{@{}l@{}}
+                                                                                            \textbf{1.} covariance n. – association \\
+                                                                                            \textbf{2.} matrix n. – grid            \\
+                                                                                            \textbf{3.} gradient n. – slope         \\
+                                                                                            \textbf{4.} active adj. – influential   \\
+                                                                                            \textbf{5.} subspace n. – subset        \\
+                                                                                        \end{tabular}
+
+        \textbf{Simplified:} A table that shows how pairs of factors change together. &
+
+        \textbf{Analogy:} Like a weather grid showing how temperature and humidity rise and fall together across regions.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, examining this matrix helps identify which direction of input perturbations most affects model output.                                                                                                                  \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Noun + Evaluate}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                        &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}       &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                               \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}} &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                            &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}   &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                                        \\ \hline
+
+        \textbf{1.} \textbf{Evaluate performance}
+                                                                                      & To assess how well someone or something is functioning or achieving goals.
+                                                                                      & We \textbf{evaluate performance} of the active subspace method by measuring reduction in empirical loss and convergence speed across test datasets.
+                                                                                      & \begin{tabular}[t]{@{}l@{}}
+                                                                                            \textbf{1.} evaluate v. – assess           \\
+                                                                                            \textbf{2.} performance n. – behavior      \\
+                                                                                            \textbf{3.} empirical adj. – observed      \\
+                                                                                            \textbf{4.} loss n. – error                \\
+                                                                                            \textbf{5.} convergence n. – stabilization \\
+                                                                                            \textbf{6.} dataset n. – collection        \\
+                                                                                        \end{tabular}
+
+        \textbf{Simplified:} Checking how well something works.                       &
+
+        \textbf{Analogy:} Like a coach timing a runner and evaluating form to see improvements.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, evaluating the model’s performance is like timing each lap to ensure consistent improvements.                                                                                                                        \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Adjective + Independent}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                        &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}       &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                                                \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}} &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                            &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}   &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                                                         \\ \hline
+
+        \textbf{1.} \textbf{Statistically independent}
+                                                                                      & Referring to random variables that do not influence each other’s probabilities or outcomes.
+                                                                                      & In covariance estimation, we assume perturbations are \textbf{statistically independent} to simplify the covariance matrix computation for active subspace analysis.
+                                                                                      & \begin{tabular}[t]{@{}l@{}}
+                                                                                            \textbf{1.} statistically adv. – according    \\ to data patterns \\
+                                                                                            \textbf{2.} independent adj. – unlinked       \\
+                                                                                            \textbf{3.} random adj. – unpredictable       \\
+                                                                                            \textbf{4.} covariance n. – joint variability \\
+                                                                                            \textbf{5.} perturbation n. - small change    \\
+                                                                                            \textbf{6.} estimation n. – calculation       \\
+                                                                                        \end{tabular}
+
+        \textbf{Simplified:} When two things don’t affect each other’s outcomes.      &
+
+        \textbf{Analogy:} Like tossing two coins where the result of one flip doesn’t change the other’s outcome.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, it’s like rolling dice in separate cups – one roll has no bearing on the other’s result.                                                                                                                                              \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Verb + Discontinuity}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                        &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}       &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                                   \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}} &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                            &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}   &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                                            \\ \hline
+
+        \textbf{1.} \textbf{Identify discontinuity}
+                                                                                      & To detect or determine the presence of a break or change in a system or function.
+                                                                                      & We \textbf{identify discontinuity} in the Hessian eigenvalue spectrum to locate sharp drops in curvature that indicate potential optimization barriers.
+                                                                                      & \begin{tabular}[t]{@{}l@{}}
+                                                                                            \textbf{1.} identify v. – detect     \\
+                                                                                            \textbf{2.} discontinuity n. – break \\
+                                                                                            \textbf{3.} system n. – mechanism    \\
+                                                                                            \textbf{4.} function n. – mapping    \\
+                                                                                            \textbf{5.} curvature n. – sharpness \\
+                                                                                        \end{tabular}
+
+        \textbf{Simplified:} Finding where a function suddenly changes.               &
+
+        \textbf{Analogy:} Like spotting a cliff edge in terrain where a path abruptly ends.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, in loss landscape analysis, identifying discontinuity is like finding cliffs in mountainous terrain to navigate safely.                                                                                                  \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Adjective + Convolutional}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                              &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}             &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                                                               \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}}       &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                               &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                                  &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                                                                        \\ \hline
+
+        \textbf{1.} \textbf{Deep convolutional}
+                                                                                            & Referring to convolutional architectures with many layers for improved feature extraction.
+                                                                                            & \textbf{Deep convolutional} neural networks achieved state-of-the-art performance when approximating the loss landscape’s active subspace via multi-channel gradient probing.
+                                                                                            & \begin{tabular}[t]{@{}l@{}}
+                                                                                                  \textbf{1.} deep adj. – multi-layered    \\
+                                                                                                  \textbf{2.} convolutional adj. – feature \\ extractor \\
+                                                                                                  \textbf{3.} neural adj. – brain-inspired \\
+                                                                                                  \textbf{4.} network n. – interconnected  \\ system    \\
+                                                                                                  \textbf{5.} gradient n. – slope          \\
+                                                                                                  \textbf{6.} approximation n. – estimate  \\
+                                                                                              \end{tabular}
+
+        \textbf{Simplified:} Many-layered filters that pull out complex patterns from data. &
+
+        \textbf{Analogy:} Like a series of sieves with increasingly fine mesh, each layer captures finer details.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, deep convolutional filters act like stacked sieves, isolating edges then textures then shapes to build a detailed image representation.                                                                                                              \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+    \textbf{Adjective + Propagation}
+
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{|l|L|L|L|L|}
+        \hline
+
+        \multicolumn{1}{|l|}{}                                                        &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{Technical Audience}}}       &
+        \multicolumn{2}{c|}{\textcolor{darkgreen}{\textbf{General Audience}}}                                                                                                                                                             \\ \hline
+
+        \multicolumn{1}{|C|}{\textcolor{darkgreen}{\textbf{TERM AND/OR COLLOCATION}}} &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Definition}}                         &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Example}}                            &
+        \multicolumn{1}{C|}{\textcolor{myorange}{Synonyms + Simplified Definition}}   &
+        \multicolumn{1}{C|}{\textcolor{mypurple}{Analogy/Simile/Metaphor + Example}}                                                                                                                                                      \\ \hline
+
+        \textbf{1.} \textbf{Back propagation}
+                                                                                      & A supervised learning algorithm used in training artificial neural networks by calculating gradients for weight updates.
+                                                                                      & We use \textbf{back propagation} to calculate gradient vectors required for power-iteration-based Hessian estimation in active subspace analysis.
+                                                                                      & \begin{tabular}[t]{@{}l@{}}
+                                                                                            \textbf{1.} back propagation n. –          \\ backward calculation \\
+                                                                                            \textbf{2.} calculate v. – compute         \\
+                                                                                            \textbf{3.} gradient n. – slope            \\
+                                                                                            \textbf{4.} vector n. – direction          \\
+                                                                                            \textbf{5.} power-iteration n. – iterative \\ process              \\
+                                                                                            \textbf{6.} Hessian n. – curvature matrix  \\
+                                                                                        \end{tabular}
+
+        \textbf{Simplified:} A method that sends error signals backward through a network to learn.
+                                                                                      &
+
+        \textbf{Analogy:} Like echoing feedback from the end of a line back to the start so each station can adjust.
+
+        \vspace{0.25cm}
+        \textbf{E.g.}, it’s like a quality-check signal traveling back along an assembly line to correct early steps when a defect is found at the end.                                                                                   \\ \hline
+    \end{tabularx}
+\end{table}
+
+\end{document}

@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{ragged2e, amsmath, amssymb}
+
+\begin{document}
+
+
+  Imagine you’re mapping a mountain range with a drone—initial flights reveal dramatic cliffs and hidden valleys, but after enough passes, the terrain stops surprising you. Training deep models faces the same challenge: gathering more data is costly, so we ask—when does each new batch of samples cease to reshape the loss surface in any meaningful way?
+
+  We begin at a local minimum and compute its Hessian matrix, whose eigenvectors define the principal axes of curvature on the loss surface—our “loss landscape.” We project the loss onto these dominant eigen-directions and measure the change
+  \[
+    \Delta_k = \bigl\|\,L_{k+1}(\theta)\text{ projected on these eigenvectors} - L_k(\theta)\bigr\|.
+  \]
+  This \(\Delta_k\) is our “drone sampling” metric: when \(k\) is small, the projected surface looks like a spiky terrain with many sharp peaks; each new sample batch can reveal a steep slope unseen before. As \(k\) grows, \(\Delta_k\) shrinks and eventually falls below a tiny threshold \(\varepsilon\), meaning the hills have smoothed out and additional flights—or data—add negligible new information.
+
+  So in practice, we:
+  \begin{enumerate}
+    \item Extract the top-D Hessian eigenvectors at the minimum.
+    \item Project the loss before and after each new data batch onto these axes to compute \(\Delta_k\).
+    \item Stop data collection once \(\Delta_k < \varepsilon\).
+  \end{enumerate}
+
+  This mountain-mapping analogy lets us decide exactly when further samples no longer change the loss landscape, saving vast amounts of compute and accelerating model development without sacrificing performance.
+
+\end{document}
