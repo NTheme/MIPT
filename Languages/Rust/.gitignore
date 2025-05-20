@@ -1,0 +1,13 @@
+bin/
+build/
+cmake-build-debug/
+cmake-build-release/
+target/
+.git/
+.venv/
+.idea/
+.vscode/
+.clang-format
+.pytest_cache/
+__pycache__/
+Cargo.lock

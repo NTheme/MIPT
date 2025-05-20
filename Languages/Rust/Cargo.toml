@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+members = [
+    "elective/hw0/add",
+    "elective/hw1/task",
+    "elective/hw3/conway",
+    "elective/hw3/min-queue",
+    "elective/hw5/flatmap",
+    "elective/hw5/itertools",
+    "elective/hw5/prefix",
+    "elective/hw6/mpsc",
+    "elective/hw6/crawler"
+]
